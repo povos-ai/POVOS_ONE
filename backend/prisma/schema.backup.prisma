@@ -1,0 +1,115 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  SUPER_ADMIN
+  ADMIN
+  MANAGER
+  STAFF
+  USER
+}
+
+enum OrganizationType {
+  GOVERNMENT
+  PRIVATE
+  NGO
+  EDUCATIONAL
+  POLITICAL
+  OTHER
+}
+
+enum OpportunityType {
+  JOB
+  SCHEME
+  TENDER
+  GRANT
+  INTERNSHIP
+  FELLOWSHIP
+  BUSINESS
+  EVENT
+  OTHER
+}
+
+enum SubmissionStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  APPROVED
+  REJECTED
+}
+
+model Person {
+  id            String   @id @default(cuid())
+  firstName     String
+  lastName      String?
+  email         String?  @unique
+  phone         String?  @unique
+  role          UserRole @default(USER)
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  organizationId String?
+  organization   Organization? @relation(fields: [organizationId], references: [id])
+
+  submissions   Submission[]
+}
+
+model Organization {
+  id            String @id @default(cuid())
+
+  name          String
+  type          OrganizationType
+
+  website       String?
+  email         String?
+  phone         String?
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  people        Person[]
+  opportunities Opportunity[]
+}
+
+model Opportunity {
+  id              String @id @default(cuid())
+
+  title           String
+  description     String
+
+  type            OpportunityType
+
+  published       Boolean @default(false)
+
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  organizationId  String
+  organization    Organization @relation(fields: [organizationId], references: [id])
+
+  submissions     Submission[]
+}
+
+model Submission {
+  id             String @id @default(cuid())
+
+  status         SubmissionStatus @default(DRAFT)
+
+  submittedAt    DateTime?
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  personId       String
+  opportunityId  String
+
+  person         Person @relation(fields: [personId], references: [id])
+  opportunity    Opportunity @relation(fields: [opportunityId], references: [id])
+}

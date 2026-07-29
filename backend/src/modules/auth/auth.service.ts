@@ -1,19 +1,25 @@
 import {
   BadRequestException,
   Injectable,
+  UnauthorizedException,
 } from '@nestjs/common';
 
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 import { PrismaService } from '../../database/prisma.service';
+
 import { RegisterDto } from './dto/register.dto';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly jwtService: JwtService,
+  ) {}
 
   async register(dto: RegisterDto) {
-    // Check if user already exists
     const existingUser = await this.prisma.person.findFirst({
       where: {
         OR: [
@@ -24,18 +30,11 @@ export class AuthService {
     });
 
     if (existingUser) {
-      throw new BadRequestException(
-        'User already exists',
-      );
+      throw new BadRequestException('User already exists');
     }
 
-    // Hash password
-    const hashedPassword = await bcrypt.hash(
-      dto.password,
-      10,
-    );
+    const hashedPassword = await bcrypt.hash(dto.password, 10);
 
-    // Create user
     const user = await this.prisma.person.create({
       data: {
         firstName: dto.firstName,
@@ -60,6 +59,56 @@ export class AuthService {
       success: true,
       message: 'User registered successfully',
       user,
+    };
+  }
+
+  async login(dto: LoginDto) {
+    const user = await this.prisma.person.findUnique({
+      where: {
+        email: dto.email,
+      },
+      select: {
+        id: true,
+        firstName: true,
+        lastName: true,
+        email: true,
+        phone: true,
+        password: true,
+        role: true,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
+
+    const passwordMatched = await bcrypt.compare(
+      dto.password,
+      user.password,
+    );
+
+    if (!passwordMatched) {
+      throw new UnauthorizedException('Invalid email or password');
+    }
+
+    const accessToken = await this.jwtService.signAsync({
+      sub: user.id,
+      email: user.email,
+      role: user.role,
+    });
+
+    return {
+      success: true,
+      message: 'Login successful',
+      accessToken,
+      user: {
+        id: user.id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        role: user.role,
+      },
     };
   }
 }

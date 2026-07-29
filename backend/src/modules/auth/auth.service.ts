@@ -22,10 +22,7 @@ export class AuthService {
   async register(dto: RegisterDto) {
     const existingUser = await this.prisma.person.findFirst({
       where: {
-        OR: [
-          { email: dto.email },
-          { phone: dto.phone },
-        ],
+        OR: [{ email: dto.email }, { phone: dto.phone }],
       },
     });
 
@@ -79,7 +76,9 @@ export class AuthService {
     });
 
     if (!user) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException(
+        'Invalid email or password',
+      );
     }
 
     const passwordMatched = await bcrypt.compare(
@@ -88,14 +87,39 @@ export class AuthService {
     );
 
     if (!passwordMatched) {
-      throw new UnauthorizedException('Invalid email or password');
+      throw new UnauthorizedException(
+        'Invalid email or password',
+      );
     }
+
+    // ==========================
+    // Generate JWT Token
+    // ==========================
 
     const accessToken = await this.jwtService.signAsync({
       sub: user.id,
       email: user.email,
       role: user.role,
     });
+
+    console.log('========================================');
+    console.log('JWT TOKEN GENERATED');
+    console.log(accessToken);
+    console.log('========================================');
+
+    try {
+      const verified = this.jwtService.verify(accessToken);
+
+      console.log('========================================');
+      console.log('JWT VERIFIED SUCCESSFULLY');
+      console.log(verified);
+      console.log('========================================');
+    } catch (error) {
+      console.log('========================================');
+      console.log('JWT VERIFY FAILED');
+      console.log(error);
+      console.log('========================================');
+    }
 
     return {
       success: true,

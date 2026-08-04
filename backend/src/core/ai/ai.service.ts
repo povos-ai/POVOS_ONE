@@ -10,7 +10,7 @@ export class AiService {
 
   constructor(private configService: ConfigService) {
     // 🔥 Hardcoded API Key for testing
-    const apiKey = 'AQ.Ab8RN6KdsuqT9t8dCDqbqBPtp-oomUAxfDlDsTsrkQzMIUf75A';
+   const apiKey = this.configService.get<string>('GEMINI_API_KEY');
     
     if (apiKey && apiKey.startsWith('AQ.')) {
       try {

@@ -152,7 +152,7 @@ POVOS ONE should be capable of supporting:
 - Individuals
 - Businesses
 - Startups
-- Government Organizations
+- Government workspaces
 - Educational Institutions
 - NGOs
 - Enterprise Customers

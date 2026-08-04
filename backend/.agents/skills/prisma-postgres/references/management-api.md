@@ -44,7 +44,7 @@ Authorization: Bearer $TOKEN
 
 ## Resource model
 
-Workspace -> Project -> Branch -> Database. Branches are a first-class resource: databases attach to a Branch, and branch-scoped env/databases are how preview isolation works.
+workspace -> Project -> Branch -> Database. Branches are a first-class resource: databases attach to a Branch, and branch-scoped env/databases are how preview isolation works.
 
 ## Common endpoints
 

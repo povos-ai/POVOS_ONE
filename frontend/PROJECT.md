@@ -14,7 +14,7 @@ Status: Sprint 1 – Enterprise Foundation
 
 # Vision
 
-To build the world's most comprehensive AI-powered Opportunity Intelligence Platform that helps every individual, business, institution, entrepreneur, political worker, farmer, student, and government organization discover, analyze, and act on opportunities from one unified platform.
+To build the world's most comprehensive AI-powered Opportunity Intelligence Platform that helps every individual, business, institution, entrepreneur, political worker, farmer, student, and government workspace discover, analyze, and act on opportunities from one unified platform.
 
 ---
 
@@ -109,7 +109,7 @@ AI Core
 
 ↓
 
-Workspace Engine
+workspace Engine
 
 ↓
 
@@ -129,9 +129,9 @@ AI Services
 
 ---
 
-# Workspaces
+# workspaces
 
-- Personal
+- useral
 - Student
 - Business
 - Startup
@@ -147,7 +147,7 @@ AI Services
 
 Dashboard
 
-AI Workspace
+AI workspace
 
 Jobs
 

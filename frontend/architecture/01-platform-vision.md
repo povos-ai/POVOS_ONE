@@ -24,7 +24,7 @@ It is a platform capable of building all of them.
 
 # Vision Statement
 
-Create one extensible platform capable of supporting unlimited organizations, unlimited industries, unlimited modules and unlimited future digital ecosystems.
+Create one extensible platform capable of supporting unlimited workspaces, unlimited industries, unlimited modules and unlimited future digital ecosystems.
 
 ---
 
@@ -82,7 +82,7 @@ Enterprise Grade
 
 ---
 
-# Target Organizations
+# Target workspaces
 
 Government
 
@@ -96,13 +96,13 @@ University
 
 Hospital
 
-Political Organization
+Political workspace
 
 Research Institution
 
 Financial Institution
 
-Custom Organizations
+Custom workspaces
 
 ---
 

@@ -26,7 +26,7 @@ Build the world's most intelligent modular AI platform that empowers individuals
 
 - Democratize opportunities through AI.
 - Simplify enterprise operations.
-- Make AI accessible to every organization.
+- Make AI accessible to every workspace.
 - Enable governments, businesses, startups and professionals from one platform.
 
 ---
@@ -67,7 +67,7 @@ Discover
 Manage
 
 - Enterprise
-- Workspace
+- workspace
 - Teams
 - Solutions
 - Documents

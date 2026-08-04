@@ -68,7 +68,7 @@ Find multiple records:
 
 ```typescript
 const users = await prisma.user.findMany({
-  where: { role: 'USER' },
+  where: { role: 'user' },
   orderBy: { name: 'asc' },
   take: 10,
   skip: 0
@@ -170,7 +170,7 @@ Update multiple records:
 
 ```typescript
 const result = await prisma.user.updateMany({
-  where: { role: 'USER' },
+  where: { role: 'user' },
   data: { verified: true }
 })
 // Returns { count: 42 }
@@ -180,7 +180,7 @@ const result = await prisma.user.updateMany({
 
 ```typescript
 const users = await prisma.user.updateManyAndReturn({
-  where: { role: 'USER' },
+  where: { role: 'user' },
   data: { verified: true }
 })
 // Returns array of updated users

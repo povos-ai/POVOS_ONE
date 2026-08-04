@@ -143,7 +143,7 @@ After `db pull`, consider:
 
 1. **Rename models** to PascalCase:
    ```prisma
-   model User {  // Was: users
+   model user {  // Was: users
      @@map("users")
    }
    ```
@@ -155,13 +155,13 @@ After `db pull`, consider:
 
 3. **Add relation names** for clarity:
    ```prisma
-   author User? @relation("PostAuthor", fields: [authorId], references: [id])
+   author user? @relation("PostAuthor", fields: [authorId], references: [id])
    ```
 
 4. **Add documentation**:
    ```prisma
-   /// User account information
-   model User {
+   /// user account information
+   model user {
      /// Primary email for authentication
      email String @unique
    }

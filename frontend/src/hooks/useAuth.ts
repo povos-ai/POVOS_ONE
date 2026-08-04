@@ -9,11 +9,11 @@ import type {
   RegisterRequest,
   ForgotPasswordRequest,
   ResetPasswordRequest,
-  User,
+  user,
 } from "@/types/auth";
 
 export default function useAuth() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setuser] = useState<user | null>(null);
   const [token, setToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export default function useAuth() {
     try {
       const response = await authService.login(data);
 
-      setUser(response.user);
+      setuser(response.user);
       setToken(response.token);
 
       // Temporary demo storage
@@ -45,7 +45,7 @@ export default function useAuth() {
     try {
       const response = await authService.register(data);
 
-      setUser(response.user);
+      setuser(response.user);
       setToken(response.token);
 
       localStorage.setItem("accessToken", response.token);
@@ -85,7 +85,7 @@ export default function useAuth() {
   function logout(): void {
     authService.logout();
 
-    setUser(null);
+    setuser(null);
     setToken(null);
 
     localStorage.removeItem("accessToken");

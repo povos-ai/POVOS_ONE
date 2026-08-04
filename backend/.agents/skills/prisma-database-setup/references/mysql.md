@@ -48,10 +48,10 @@ DATABASE_URL="mysql://user:password@localhost:3306/mydb"
 ### Connection String Format
 
 ```
-mysql://USER:PASSWORD@HOST:PORT/DATABASE
+mysql://user:PASSWORD@HOST:PORT/DATABASE
 ```
 
-- **USER**: Database user
+- **user**: Database user
 - **PASSWORD**: Password
 - **HOST**: Hostname
 - **PORT**: Port (default 3306)
@@ -76,7 +76,7 @@ Use a driver adapter for the standard SQL workflow.
      host: 'localhost',
      port: 3306,
      connectionLimit: 5,
-     user: process.env.MYSQL_USER,
+     user: process.env.MYSQL_user,
      password: process.env.MYSQL_PASSWORD,
      database: process.env.MYSQL_DATABASE,
    })

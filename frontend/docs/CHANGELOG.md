@@ -51,7 +51,7 @@ Date: July 2026
 - Stats Cards
 - Opportunity Table
 - Search
-- User Avatar
+- user Avatar
 
 ---
 

@@ -48,7 +48,7 @@ DATABASE_URL="sqlserver://localhost:1433;database=mydb;user=sa;password=Password
 ### Connection String Format
 
 ```
-sqlserver://HOST:PORT;database=DB;user=USER;password=PASS;encrypt=true;trustServerCertificate=true
+sqlserver://HOST:PORT;database=DB;user=user;password=PASS;encrypt=true;trustServerCertificate=true
 ```
 
 - **encrypt**: Required for Azure (true).
@@ -73,7 +73,7 @@ Use a driver adapter for the standard SQL workflow.
      server: 'localhost',
      port: 1433,
      database: 'mydb',
-     user: process.env.SQLSERVER_USER,
+     user: process.env.SQLSERVER_user,
      password: process.env.SQLSERVER_PASSWORD,
      options: {
        encrypt: true,

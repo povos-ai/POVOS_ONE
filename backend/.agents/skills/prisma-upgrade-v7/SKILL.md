@@ -224,7 +224,7 @@ const userSelect = {
   id: true,
   email: true,
   name: true,
-} satisfies Prisma.UserSelect
+} satisfies Prisma.userSelect
 ```
 
 ### 8. Run migrations and generate

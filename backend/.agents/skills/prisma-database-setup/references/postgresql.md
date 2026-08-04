@@ -48,10 +48,10 @@ DATABASE_URL="postgresql://user:password@localhost:5432/mydb?schema=public"
 ### Connection String Format
 
 ```
-postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
+postgresql://user:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
 ```
 
-- **USER**: Database user
+- **user**: Database user
 - **PASSWORD**: Password (URL encoded if special chars)
 - **HOST**: Hostname (localhost, IP, or domain)
 - **PORT**: Port (default 5432)

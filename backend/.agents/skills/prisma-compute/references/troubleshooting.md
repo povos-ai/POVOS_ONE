@@ -99,7 +99,7 @@ If the integrated deploy cannot complete, scaffold succeeds but deploy should be
 With PostgreSQL, no `--database-url`, and no `--no-prisma-postgres`, setup can provision Prisma Postgres. For local smoke tests, pass:
 
 ```bash
---no-prisma-postgres --database-url "postgresql://USER:PASSWORD@HOST:PORT/DB"
+--no-prisma-postgres --database-url "postgresql://user:PASSWORD@HOST:PORT/DB"
 ```
 
 Use a disposable real database URL if Prisma commands need to run.
@@ -206,7 +206,7 @@ test -f prisma.config.ts && sed -n '1,160p' prisma.config.ts
 test -f prisma/schema.prisma && sed -n '1,220p' prisma/schema.prisma
 ```
 
-Never deploy `postgresql://USER:PASSWORD@HOST:PORT/DATABASE` placeholder values.
+Never deploy `postgresql://user:PASSWORD@HOST:PORT/DATABASE` placeholder values.
 
 ## Wrong Branch, Env, or Database
 

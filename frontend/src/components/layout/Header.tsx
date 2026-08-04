@@ -2,7 +2,7 @@
 
 import { Search, Bot } from "lucide-react";
 import NotificationBell from "@/components/dashboard/NotificationBell";
-import UserMenu from "@/components/dashboard/UserMenu";
+import userMenu from "@/components/dashboard/userMenu";
 
 export default function Header() {
   return (
@@ -43,7 +43,7 @@ export default function Header() {
 
         <NotificationBell />
 
-        <UserMenu />
+        <userMenu />
 
       </div>
 

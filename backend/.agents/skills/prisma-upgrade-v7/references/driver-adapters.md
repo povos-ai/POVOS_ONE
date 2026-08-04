@@ -84,7 +84,7 @@ const adapter = new PrismaMariaDb({
   host: 'localhost',
   port: 3306,
   connectionLimit: 5,
-  user: process.env.MYSQL_USER,
+  user: process.env.MYSQL_user,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DATABASE,
 })
@@ -154,7 +154,7 @@ const adapter = new PrismaMssql({
   server: 'localhost',
   port: 1433,
   database: 'mydb',
-  user: process.env.SQLSERVER_USER,
+  user: process.env.SQLSERVER_user,
   password: process.env.SQLSERVER_PASSWORD,
   options: {
     encrypt: true,

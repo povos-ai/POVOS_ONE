@@ -108,7 +108,7 @@ Enterprise Features
 - Reports
 - Role Based Access
 - Audit Logs
-- Team Workspace
+- Team workspace
 
 Status:
 Pending

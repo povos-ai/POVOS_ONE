@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { userouter } from "next/navigation";
 
 import Input from "@/components/ui/Input";
 import Button from "@/components/ui/Button";
 import { useAuthContext } from "@/context/AuthContext";
 
 export default function LoginForm() {
-  const router = useRouter();
+  const router = userouter();
 
   const { login, loading } = useAuthContext();
 

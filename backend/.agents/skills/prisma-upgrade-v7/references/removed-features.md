@@ -206,7 +206,7 @@ import { Prisma } from '../generated/prisma/client'
 const userSelect = {
   id: true,
   email: true,
-} satisfies Prisma.UserSelect
+} satisfies Prisma.userSelect
 ```
 
 ## rejectOnNotFound

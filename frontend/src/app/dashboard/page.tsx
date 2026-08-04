@@ -84,7 +84,7 @@ export default function DashboardPage() {
         <StatsCard
           title="AI Matches"
           value="1,289"
-          subtitle="Personalized Recommendations"
+          subtitle="useralized Recommendations"
         />
 
         <StatsCard

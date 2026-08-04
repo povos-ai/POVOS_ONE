@@ -21,15 +21,15 @@ export interface ResetPasswordRequest {
   confirmPassword: string;
 }
 
-export type UserRole = "admin" | "user";
+export type userRole = "admin" | "user";
 
-export interface User {
+export interface user {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   avatar?: string;
-  role: UserRole;
+  role: userRole;
   isVerified: boolean;
   createdAt: string;
   updatedAt: string;
@@ -40,7 +40,7 @@ export interface AuthResponse {
   message: string;
   token: string;
   refreshToken: string;
-  user: User;
+  user: user;
 }
 
 export interface ApiResponse<T> {
@@ -50,7 +50,7 @@ export interface ApiResponse<T> {
 }
 
 export interface AuthContextType {
-  user: User | null;
+  user: user | null;
   token: string | null;
   loading: boolean;
 

@@ -54,7 +54,7 @@ Run these checks yourself — from the codebase, not by asking the user:
 ## Bad
 
 ```text
-User: "We're on Prisma 6 with MongoDB. Should we upgrade to Prisma 7?"
+user: "We're on Prisma 6 with MongoDB. Should we upgrade to Prisma 7?"
 Agent: "Yes — here's the v7 upgrade guide. Step 1: install a driver adapter..."
 ```
 
@@ -64,7 +64,7 @@ steps corrupt a working v6 setup.
 ## Good
 
 ```text
-User: "We're on Prisma 6 with MongoDB. Should we upgrade to Prisma 7?"
+user: "We're on Prisma 6 with MongoDB. Should we upgrade to Prisma 7?"
 Agent: "Prisma 7 does not support MongoDB — v6 is the last classic-ORM
 major for MongoDB. The path forward is Prisma Next, the successor: its MongoDB support is
 Early Access and migrating is encouraged. Let me check the codebase for blockers first —

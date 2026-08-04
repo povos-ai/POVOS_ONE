@@ -34,11 +34,11 @@ They extend them.
 
 ## Identity
 
-User
+user
 
-Person
+user
 
-Organization
+workspace
 
 Team
 
@@ -162,11 +162,11 @@ Scheduler
 
 # Universal Relationships
 
-Organization
+workspace
 
 ↓
 
-Users
+users
 
 ↓
 
@@ -222,7 +222,7 @@ Investment
 
 ---
 
-Person
+user
 
 ↓
 
@@ -254,7 +254,7 @@ Customer
 
 ---
 
-Organization
+workspace
 
 ↓
 
@@ -274,7 +274,7 @@ University
 
 ↓
 
-Political Organization
+Political workspace
 
 ↓
 

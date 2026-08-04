@@ -34,7 +34,7 @@ Features:
 - Recent Activity
 - AI Recommendations
 - Notifications
-- Workspace Switcher
+- workspace Switcher
 
 ---
 
@@ -85,7 +85,7 @@ Includes:
 
 ## 6. Enterprise Platform
 
-Manage organizations.
+Manage workspaces.
 
 Features:
 
@@ -97,14 +97,14 @@ Features:
 
 ---
 
-## 7. Workspace
+## 7. workspace
 
-Workspace management.
+workspace management.
 
 Features:
 
-- Create Workspace
-- Switch Workspace
+- Create workspace
+- Switch workspace
 - Team Collaboration
 
 ---
@@ -122,7 +122,7 @@ Examples:
 
 ---
 
-## 9. User Profile
+## 9. user Profile
 
 - Profile
 - Settings

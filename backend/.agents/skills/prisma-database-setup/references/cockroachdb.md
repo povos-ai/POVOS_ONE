@@ -70,7 +70,7 @@ Use a driver adapter for the standard SQL workflow. CockroachDB is PostgreSQL-co
 CockroachDB uses `BigInt` or `UUID` for IDs efficiently.
 
 ```prisma
-model User {
+model user {
   id BigInt @id @default(autoincrement()) // Uses unique_rowid()
 }
 ```
@@ -78,7 +78,7 @@ model User {
 Or using string UUIDs:
 
 ```prisma
-model User {
+model user {
   id String @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
 }
 ```

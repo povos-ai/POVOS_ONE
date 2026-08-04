@@ -55,9 +55,9 @@ snake_case plural
 
 Examples:
 
-persons
+users
 
-organizations
+workspaces
 
 opportunities
 
@@ -72,9 +72,9 @@ createdAt
 
 updatedAt
 
-organizationId
+workspaceId
 
-personId
+userId
 
 ---
 
@@ -112,7 +112,7 @@ Search Fields
 
 # Multi-Tenant Ready
 
-Every business table should support organization ownership where applicable.
+Every business table should support workspace ownership where applicable.
 
 ---
 

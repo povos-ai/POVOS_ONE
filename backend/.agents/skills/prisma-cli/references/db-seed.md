@@ -162,7 +162,7 @@ prisma db seed
 const count = await prisma.user.count()
 if (count === 0) {
   // Only seed if empty
-  await seedUsers()
+  await seedusers()
 }
 ```
 

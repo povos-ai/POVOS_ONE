@@ -105,7 +105,7 @@ Use this skill for:
 - `verify-config-support` - Treat `prisma.compute.ts` as the typed Compute config; inspect the project's config and generated scripts before editing or deploying.
 - `verify-auth-workspace-support` - Use `@prisma/cli auth workspace` commands for local workspace list/use/logout flows.
 
-### 2. Auth and Workspace Selection
+### 2. Auth and workspace Selection
 
 - `auth-source-precedence` - A non-empty `PRISMA_SERVICE_TOKEN` is the active auth source for commands and local OAuth workspaces are ignored for execution. If it is set but empty, the CLI should fail instead of falling back to stored OAuth.
 - `auth-multi-workspace` - `auth login` can store OAuth sessions for multiple workspaces on the same machine. The active workspace pointer selects which stored OAuth grant normal commands use.
@@ -113,7 +113,7 @@ Use this skill for:
 - `auth-switch-explicitly` - Use `auth workspace use <id-or-name>` for non-interactive switching. Use `auth workspace use` with no argument only for an interactive picker or when exactly one local OAuth workspace exists.
 - `auth-no-fallthrough` - If the active OAuth workspace is logged out or fails refresh, the CLI should not silently fall through to another cached workspace. Run `auth workspace use <id>` to choose the next workspace.
 - `auth-single-workspace-logout` - Use `auth workspace logout <id-or-name>` or `auth logout --workspace <id-or-name>` to remove one local OAuth workspace session. Plain `auth logout` clears all local OAuth workspace sessions.
-- `auth-service-token-switching` - While `PRISMA_SERVICE_TOKEN` is set, `auth workspace use` is unavailable because the service token is the active auth source; unset the env var to switch local OAuth workspaces. Workspace logout still only cleans local OAuth state.
+- `auth-service-token-switching` - While `PRISMA_SERVICE_TOKEN` is set, `auth workspace use` is unavailable because the service token is the active auth source; unset the env var to switch local OAuth workspaces. workspace logout still only cleans local OAuth state.
 - `auth-storage-awareness` - Local OAuth credentials live in the platform auth file, with workspace metadata in a sidecar context file. Project pins live in `.prisma/local.json`, and CLI app/project state lives in `.prisma/cli/state.json` near `prisma.compute.ts` when present.
 
 ### 3. Framework Readiness
@@ -139,7 +139,7 @@ Use this skill for:
 - `config-targets` - In multi-app configs, `@prisma/cli app deploy web` selects the `apps.web` target. Without `[app]`, commands can infer the target from the current directory; otherwise deploy can run all targets while build/run require one.
 - `config-region-new-app-only` - A config `region` is only a default for newly created apps; deploys to existing apps keep the app's current region.
 - `config-custom-artifact` - Use `framework: "custom"` with `build.outputDirectory` and `build.entrypoint` for prebuilt or custom-built artifacts.
-- `config-no-project-branch-secrets` - Do not commit Workspace, Project, Branch, production intent, service tokens, or secret values in `prisma.compute.ts`; keep those in flags, `.prisma/local.json`, env storage, or CI secrets. App-level defaults such as `region`, `root`, `framework`, `entry`, `httpPort`, and non-secret env file paths belong in config.
+- `config-no-project-branch-secrets` - Do not commit workspace, Project, Branch, production intent, service tokens, or secret values in `prisma.compute.ts`; keep those in flags, `.prisma/local.json`, env storage, or CI secrets. App-level defaults such as `region`, `root`, `framework`, `entry`, `httpPort`, and non-secret env file paths belong in config.
 - `config-flags-win` - Explicit deploy flags such as `--framework`, `--entry`, `--http-port`, `--region`, and `--env` override matching config values.
 
 ### 6. Branch, Environment, and Database

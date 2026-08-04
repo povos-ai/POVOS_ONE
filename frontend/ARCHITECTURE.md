@@ -2,7 +2,7 @@
 
 ## Vision
 
-POVOS ONE is an AI-powered Opportunity Intelligence Operating System designed to help citizens, businesses, political organizations, researchers, students, entrepreneurs, and institutions discover, analyze, and act on opportunities from a single platform.
+POVOS ONE is an AI-powered Opportunity Intelligence Operating System designed to help citizens, businesses, political workspaces, researchers, students, entrepreneurs, and institutions discover, analyze, and act on opportunities from a single platform.
 
 The architecture is designed to be modular, scalable, secure, and enterprise-ready.
 
@@ -18,7 +18,7 @@ The architecture is designed to be modular, scalable, secure, and enterprise-rea
 - Scalable
 - Secure by Design
 - API Driven
-- Multi Workspace
+- Multi workspace
 - Future Ready
 
 ---
@@ -41,7 +41,7 @@ POVOS ONE
 
 ├── Business Advisory
 
-├── Political Workspace
+├── Political workspace
 
 ├── Election Management
 
@@ -144,10 +144,10 @@ Future AI modules
 
 Designed to support
 
-- Millions of Users
+- Millions of users
 - Thousands of Opportunities
-- Multiple Organizations
-- Multiple Workspaces
+- Multiple workspaces
+- Multiple workspaces
 - Multiple Languages
 
 ---

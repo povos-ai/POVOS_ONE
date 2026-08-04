@@ -75,7 +75,7 @@ bunx create-prisma@latest \
   --template hono \
   --provider postgresql \
   --no-prisma-postgres \
-  --database-url "postgresql://USER:PASSWORD@HOST:PORT/DB" \
+  --database-url "postgresql://user:PASSWORD@HOST:PORT/DB" \
   --no-deploy
 ```
 

@@ -44,7 +44,7 @@ Extensions
 
 Identity
 
-Organizations
+workspaces
 
 Authorization
 
@@ -78,11 +78,11 @@ Localization
 
 # Universal Objects
 
-Person
+user
 
-Organization
+workspace
 
-User
+user
 
 Role
 

@@ -15,7 +15,7 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
   ) {
     console.log('========== JWT GUARD ==========');
     console.log('ERR:', err);
-    console.log('USER:', user);
+    console.log('user:', user);
     console.log('INFO:', info);
     console.log('===============================');
 

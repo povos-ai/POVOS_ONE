@@ -49,7 +49,7 @@ Every resource ID carries a type prefix:
 | `proj_` | Project |
 | `db_` | Database |
 | `con_` | Connection |
-| `wksp_` | Workspace |
+| `wksp_` | workspace |
 
 Always include the prefix when sending IDs in API requests.
 
@@ -96,7 +96,7 @@ All errors follow this shape:
 
 ### Self-correction patterns
 
-- **401**: Token is invalid or expired. Create a new service token in Console → Workspace Settings → Service Tokens.
+- **401**: Token is invalid or expired. Create a new service token in Console → workspace Settings → Service Tokens.
 - **404**: Verify the resource ID includes the correct prefix (`proj_`, `db_`, `con_`). Use `GET /v1/projects` or `GET /v1/databases` to list available resources.
 - **422**: Check the request body against the endpoint schema. Common issues: missing required fields, invalid region ID, empty `name`.
 - **429**: Wait 2–5 seconds and retry. If repeated, increase the backoff interval.

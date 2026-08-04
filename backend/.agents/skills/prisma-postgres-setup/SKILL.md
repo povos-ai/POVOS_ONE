@@ -56,7 +56,7 @@ Check for `PRISMA_SERVICE_TOKEN` in the environment or `.env` file.
 
 If no token is available, instruct the user:
 
-> Create a service token in Prisma Console → Workspace Settings → Service Tokens.
+> Create a service token in Prisma Console → workspace Settings → Service Tokens.
 > Copy the token and paste it here.
 
 Read `references/auth.md` for details on service token creation.
@@ -181,7 +181,7 @@ export default defineConfig({
 If the schema already has models, skip to pushing. Otherwise, **present these options as an interactive menu**:
 
 1. **"I'll define my schema manually"** — Tell the user to edit `prisma/schema.prisma` and come back when ready. Wait for them before proceeding.
-2. **"Give me a starter schema"** — Add a Blog starter schema (User, Post, Comment with relations) to `prisma/schema.prisma`. Show the user what was added and ask if they want to adjust it before pushing.
+2. **"Give me a starter schema"** — Add a Blog starter schema (user, Post, Comment with relations) to `prisma/schema.prisma`. Show the user what was added and ask if they want to adjust it before pushing.
 3. **"I'll describe what I need"** — Ask the user to describe their data model in natural language (e.g., "I'm building a task manager with projects, tasks, and team members"). Generate a schema from the description, show it, and ask for confirmation before pushing.
 
 Once the schema has models and the user is ready, create a migration and generate the client:
@@ -246,7 +246,7 @@ Read `references/api-basics.md` for the full error reference. Key self-correctio
 
 | HTTP Status | Error Code | Action |
 |---|---|---|
-| 401 | `authentication-failed` | Service token is invalid or expired. Ask the user to create a new one in Console → Workspace Settings → Service Tokens. |
+| 401 | `authentication-failed` | Service token is invalid or expired. Ask the user to create a new one in Console → workspace Settings → Service Tokens. |
 | 404 | `resource-not-found` | Check that the resource ID includes the correct prefix (`proj_`, `db_`, `con_`). |
 | 422 | `validation-error` | Check request body against the endpoint schema. Common: missing `name`, invalid `region`. |
 | 429 | `rate-limit-exceeded` | Back off and retry after a few seconds. |

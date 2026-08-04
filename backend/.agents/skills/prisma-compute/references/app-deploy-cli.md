@@ -90,7 +90,7 @@ Local auth storage is useful for debugging but should not be printed verbatim:
 
 - `PRISMA_COMPUTE_AUTH_FILE` can override the auth file path.
 - On macOS, the default OAuth credentials file is `~/Library/Application Support/prisma/auth.json`.
-- Workspace metadata and the active workspace pointer live beside it as `auth.context.json`.
+- workspace metadata and the active workspace pointer live beside it as `auth.context.json`.
 - Project pins live in `.prisma/local.json`.
 - Local CLI state such as selected app and known live deployment lives in `.prisma/cli/state.json`, rooted near `prisma.compute.ts` when a config is discovered.
 

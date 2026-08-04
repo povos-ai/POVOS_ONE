@@ -9,7 +9,7 @@ Service tokens authenticate server-to-server requests. They are scoped to a work
 ### Creating a service token
 
 1. Open https://console.prisma.io
-2. Navigate to **Workspace Settings** → **Service Tokens**
+2. Navigate to **workspace Settings** → **Service Tokens**
 3. Click **Create Token**
 4. Copy the token immediately — it is only shown once
 
@@ -36,7 +36,7 @@ Service tokens are workspace-scoped. A single token grants access to all project
 
 - Store tokens in environment variables or secret managers, never in source code
 - Add `.env` to `.gitignore` to prevent accidental commits
-- Rotate tokens periodically via Console → Workspace Settings → Service Tokens
+- Rotate tokens periodically via Console → workspace Settings → Service Tokens
 - In CI/CD, store tokens as encrypted secrets (e.g., GitHub Secrets)
 
 ## OAuth 2.0 (for user-scoped access)

@@ -32,7 +32,7 @@ In Progress
 - [ ] Register Page
 - [ ] Forgot Password
 - [ ] Reset Password
-- [ ] User Profile
+- [ ] user Profile
 - [ ] Role Management
 
 ---
@@ -72,7 +72,7 @@ In Progress
 - [ ] Reports
 - [ ] Analytics
 - [ ] Audit Logs
-- [ ] Team Workspace
+- [ ] Team workspace
 
 ---
 

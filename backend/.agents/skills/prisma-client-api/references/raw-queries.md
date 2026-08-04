@@ -8,17 +8,17 @@ Execute SELECT queries and get typed results:
 
 ```typescript
 const users = await prisma.$queryRaw`
-  SELECT * FROM "User" WHERE email LIKE ${'%@prisma.io'}
+  SELECT * FROM "user" WHERE email LIKE ${'%@prisma.io'}
 `
 ```
 
 ### With type
 
 ```typescript
-type User = { id: number; email: string; name: string | null }
+type user = { id: number; email: string; name: string | null }
 
-const users = await prisma.$queryRaw<User[]>`
-  SELECT id, email, name FROM "User" WHERE role = ${'ADMIN'}
+const users = await prisma.$queryRaw<user[]>`
+  SELECT id, email, name FROM "user" WHERE role = ${'ADMIN'}
 `
 ```
 
@@ -31,7 +31,7 @@ import { Prisma } from '../generated/client'
 
 const column = 'email'
 const users = await prisma.$queryRaw`
-  SELECT ${Prisma.raw(column)} FROM "User"
+  SELECT ${Prisma.raw(column)} FROM "user"
 `
 ```
 
@@ -43,7 +43,7 @@ Build queries dynamically:
 import { Prisma } from '../generated/client'
 
 const email = 'alice@prisma.io'
-const query = Prisma.sql`SELECT * FROM "User" WHERE email = ${email}`
+const query = Prisma.sql`SELECT * FROM "user" WHERE email = ${email}`
 const users = await prisma.$queryRaw(query)
 ```
 
@@ -58,7 +58,7 @@ const conditions = [
 ]
 
 const users = await prisma.$queryRaw`
-  SELECT * FROM "User" 
+  SELECT * FROM "user" 
   WHERE ${Prisma.join(conditions, ' AND ')}
 `
 ```
@@ -69,7 +69,7 @@ Execute INSERT, UPDATE, DELETE (returns affected count):
 
 ```typescript
 const count = await prisma.$executeRaw`
-  UPDATE "User" SET verified = true WHERE email LIKE ${'%@prisma.io'}
+  UPDATE "user" SET verified = true WHERE email LIKE ${'%@prisma.io'}
 `
 console.log(`Updated ${count} users`)
 ```
@@ -78,7 +78,7 @@ console.log(`Updated ${count} users`)
 
 ```typescript
 const deleted = await prisma.$executeRaw`
-  DELETE FROM "User" WHERE "deletedAt" < ${thirtyDaysAgo}
+  DELETE FROM "user" WHERE "deletedAt" < ${thirtyDaysAgo}
 `
 ```
 
@@ -97,7 +97,7 @@ For fully dynamic queries (use with caution!):
 
 ```typescript
 // ⚠️ SQL injection risk - only use with trusted input
-const table = 'User'
+const table = 'user'
 const users = await prisma.$queryRawUnsafe(
   `SELECT * FROM "${table}" WHERE id = $1`,
   userId
@@ -108,7 +108,7 @@ const users = await prisma.$queryRawUnsafe(
 
 ```typescript
 const result = await prisma.$executeRawUnsafe(
-  'UPDATE "User" SET name = $1 WHERE id = $2',
+  'UPDATE "user" SET name = $1 WHERE id = $2',
   'Alice',
   1
 )
@@ -119,10 +119,10 @@ const result = await prisma.$executeRawUnsafe(
 ### Safe (parameterized)
 
 ```typescript
-// ✅ User input is parameterized
+// ✅ user input is parameterized
 const email = userInput
 const users = await prisma.$queryRaw`
-  SELECT * FROM "User" WHERE email = ${email}
+  SELECT * FROM "user" WHERE email = ${email}
 `
 ```
 
@@ -132,7 +132,7 @@ const users = await prisma.$queryRaw`
 // ❌ SQL injection vulnerability!
 const email = userInput
 const users = await prisma.$queryRawUnsafe(
-  `SELECT * FROM "User" WHERE email = '${email}'`
+  `SELECT * FROM "user" WHERE email = '${email}'`
 )
 ```
 
@@ -143,12 +143,12 @@ const users = await prisma.$queryRawUnsafe(
 ```typescript
 // Array operations
 const users = await prisma.$queryRaw`
-  SELECT * FROM "User" WHERE 'admin' = ANY(roles)
+  SELECT * FROM "user" WHERE 'admin' = ANY(roles)
 `
 
 // JSON operations
 const users = await prisma.$queryRaw`
-  SELECT * FROM "User" WHERE metadata->>'theme' = 'dark'
+  SELECT * FROM "user" WHERE metadata->>'theme' = 'dark'
 `
 ```
 
@@ -178,7 +178,7 @@ PostgreSQL returns BigInt for COUNT:
 
 ```typescript
 const result = await prisma.$queryRaw<[{ count: bigint }]>`
-  SELECT COUNT(*) as count FROM "User"
+  SELECT COUNT(*) as count FROM "user"
 `
 const count = Number(result[0].count)
 ```
@@ -188,7 +188,7 @@ const count = Number(result[0].count)
 ```typescript
 type Result = { createdAt: Date }
 const users = await prisma.$queryRaw<Result[]>`
-  SELECT "createdAt" FROM "User"
+  SELECT "createdAt" FROM "user"
 `
 // createdAt is already a Date object
 ```

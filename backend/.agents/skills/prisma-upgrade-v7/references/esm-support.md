@@ -87,7 +87,7 @@ import { PrismaClient } from '../generated/prisma/client'
 ```typescript
 import { Prisma } from '../generated/prisma/browser'
 import { Role } from '../generated/prisma/enums'
-import type { UserModel } from '../generated/prisma/models/User'
+import type { userModel } from '../generated/prisma/models/user'
 ```
 
 ## File Extensions

@@ -69,7 +69,7 @@ POST /v1/projects
     "workspace": {
       "id": "wksp_xyz789",
       "url": "https://api.prisma.io/v1/workspaces/wksp_xyz789",
-      "name": "My Workspace"
+      "name": "My workspace"
     },
     "database": {
       "id": "db_def456",

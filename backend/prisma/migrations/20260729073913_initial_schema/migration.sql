@@ -1,8 +1,8 @@
 -- CreateEnum
-CREATE TYPE "UserRole" AS ENUM ('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF', 'USER');
+CREATE TYPE "userRole" AS ENUM ('SUPER_ADMIN', 'ADMIN', 'MANAGER', 'STAFF', 'user');
 
 -- CreateEnum
-CREATE TYPE "OrganizationType" AS ENUM ('GOVERNMENT', 'PRIVATE', 'NGO', 'EDUCATIONAL', 'POLITICAL', 'OTHER');
+CREATE TYPE "workspaceType" AS ENUM ('GOVERNMENT', 'PRIVATE', 'NGO', 'EDUCATIONAL', 'POLITICAL', 'OTHER');
 
 -- CreateEnum
 CREATE TYPE "OpportunityType" AS ENUM ('JOB', 'SCHEME', 'TENDER', 'GRANT', 'INTERNSHIP', 'FELLOWSHIP', 'BUSINESS', 'EVENT', 'OTHER');
@@ -11,32 +11,32 @@ CREATE TYPE "OpportunityType" AS ENUM ('JOB', 'SCHEME', 'TENDER', 'GRANT', 'INTE
 CREATE TYPE "SubmissionStatus" AS ENUM ('DRAFT', 'SUBMITTED', 'UNDER_REVIEW', 'APPROVED', 'REJECTED');
 
 -- CreateTable
-CREATE TABLE "Person" (
+CREATE TABLE "user" (
     "id" TEXT NOT NULL,
     "firstName" TEXT NOT NULL,
     "lastName" TEXT,
     "email" TEXT,
     "phone" TEXT,
-    "role" "UserRole" NOT NULL DEFAULT 'USER',
+    "role" "userRole" NOT NULL DEFAULT 'user',
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "organizationId" TEXT,
+    "workspaceId" TEXT,
 
-    CONSTRAINT "Person_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "Organization" (
+CREATE TABLE "workspace" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "type" "OrganizationType" NOT NULL,
+    "type" "workspaceType" NOT NULL,
     "website" TEXT,
     "email" TEXT,
     "phone" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
-    CONSTRAINT "Organization_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "workspace_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -48,7 +48,7 @@ CREATE TABLE "Opportunity" (
     "published" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "organizationId" TEXT NOT NULL,
+    "workspaceId" TEXT NOT NULL,
 
     CONSTRAINT "Opportunity_pkey" PRIMARY KEY ("id")
 );
@@ -60,26 +60,26 @@ CREATE TABLE "Submission" (
     "submittedAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
-    "personId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "opportunityId" TEXT NOT NULL,
 
     CONSTRAINT "Submission_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Person_email_key" ON "Person"("email");
+CREATE UNIQUE INDEX "user_email_key" ON "user"("email");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Person_phone_key" ON "Person"("phone");
+CREATE UNIQUE INDEX "user_phone_key" ON "user"("phone");
 
 -- AddForeignKey
-ALTER TABLE "Person" ADD CONSTRAINT "Person_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "user" ADD CONSTRAINT "user_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "workspace"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Opportunity" ADD CONSTRAINT "Opportunity_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Opportunity" ADD CONSTRAINT "Opportunity_workspaceId_fkey" FOREIGN KEY ("workspaceId") REFERENCES "workspace"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Submission" ADD CONSTRAINT "Submission_personId_fkey" FOREIGN KEY ("personId") REFERENCES "Person"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Submission" ADD CONSTRAINT "Submission_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Submission" ADD CONSTRAINT "Submission_opportunityId_fkey" FOREIGN KEY ("opportunityId") REFERENCES "Opportunity"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

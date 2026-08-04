@@ -229,7 +229,7 @@ const users = await prisma.user.findMany({
 ### Negative take (reverse)
 
 ```typescript
-const lastUsers = await prisma.user.findMany({
+const lastusers = await prisma.user.findMany({
   take: -10,
   orderBy: { id: 'asc' }
 })

@@ -7,15 +7,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum UserRole {
+enum userRole {
   SUPER_ADMIN
   ADMIN
   MANAGER
   STAFF
-  USER
+  user
 }
 
-enum OrganizationType {
+enum workspaceType {
   GOVERNMENT
   PRIVATE
   NGO
@@ -44,28 +44,28 @@ enum SubmissionStatus {
   REJECTED
 }
 
-model Person {
+model user {
   id            String   @id @default(cuid())
   firstName     String
   lastName      String?
   email         String?  @unique
   phone         String?  @unique
-  role          UserRole @default(USER)
+  role          userRole @default(user)
 
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  organizationId String?
-  organization   Organization? @relation(fields: [organizationId], references: [id])
+  workspaceId String?
+  workspace   workspace? @relation(fields: [workspaceId], references: [id])
 
   submissions   Submission[]
 }
 
-model Organization {
+model workspace {
   id            String @id @default(cuid())
 
   name          String
-  type          OrganizationType
+  type          workspaceType
 
   website       String?
   email         String?
@@ -74,7 +74,7 @@ model Organization {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  people        Person[]
+  people        user[]
   opportunities Opportunity[]
 }
 
@@ -91,8 +91,8 @@ model Opportunity {
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 
-  organizationId  String
-  organization    Organization @relation(fields: [organizationId], references: [id])
+  workspaceId  String
+  workspace    workspace @relation(fields: [workspaceId], references: [id])
 
   submissions     Submission[]
 }
@@ -107,9 +107,9 @@ model Submission {
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 
-  personId       String
+  userId       String
   opportunityId  String
 
-  person         Person @relation(fields: [personId], references: [id])
+  user         user @relation(fields: [userId], references: [id])
   opportunity    Opportunity @relation(fields: [opportunityId], references: [id])
 }

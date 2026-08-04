@@ -131,7 +131,7 @@ export default defineConfig({
    const userSelect = {
      id: true,
      email: true,
-   } satisfies Prisma.UserSelect
+   } satisfies Prisma.userSelect
    ```
 
 ## Generated Entrypoints

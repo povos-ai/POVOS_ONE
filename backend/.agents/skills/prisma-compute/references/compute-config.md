@@ -203,7 +203,7 @@ Explicit flags win over config values:
 
 `region` is not an app selector. Config `region` and `--region` are only used when deploy creates a new app. If the selected app already exists, deploy keeps that app's existing region.
 
-`prisma.compute.ts` never selects Workspace, Project, Branch, or production intent. Keep those in CLI flags, environment variables, `.prisma/local.json`, or CI configuration:
+`prisma.compute.ts` never selects workspace, Project, Branch, or production intent. Keep those in CLI flags, environment variables, `.prisma/local.json`, or CI configuration:
 
 ```bash
 bunx @prisma/cli@latest app deploy api \

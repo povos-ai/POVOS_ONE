@@ -36,7 +36,7 @@ Do **not** apply the Prisma 7 SQL adapter setup here. MongoDB does not use a SQL
 MongoDB models **must** have a mapped `_id` field using `@id` and `@map("_id")`, usually of type `String` with `auto()` and `db.ObjectId`.
 
 ```prisma
-model User {
+model user {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   email String @unique
   name  String?
@@ -50,7 +50,7 @@ Relations in MongoDB expect IDs to be `db.ObjectId` type.
 ```prisma
 model Post {
   id       String @id @default(auto()) @map("_id") @db.ObjectId
-  author   User   @relation(fields: [authorId], references: [id])
+  author   user   @relation(fields: [authorId], references: [id])
   authorId String @db.ObjectId
 }
 ```

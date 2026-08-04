@@ -8,18 +8,18 @@ Status: Draft
 
 # Core Canonical Relationships
 
-Person
+user
 │
-├── User Account(s)
+├── user Account(s)
 ├── Application(s)
 ├── Document(s)
 ├── Skill(s)
 ├── Notification(s)
-└── Organization Membership(s)
+└── workspace Membership(s)
 
-Organization
+workspace
 │
-├── User(s)
+├── user(s)
 ├── Opportunity(s)
 ├── Department(s)
 ├── Project(s)
@@ -35,7 +35,7 @@ Opportunity
 
 Application
 │
-├── Person
+├── user
 ├── Opportunity
 ├── Submitted Document(s)
 ├── Review(s)
@@ -45,17 +45,17 @@ Application
 
 # Cardinality
 
-Organization 1 ---- * Opportunity
+workspace 1 ---- * Opportunity
 
-Person 1 ---- * Application
+user 1 ---- * Application
 
 Opportunity 1 ---- * Application
 
-Organization * ---- * Person
+workspace * ---- * user
 
-Person 1 ---- * Document
+user 1 ---- * Document
 
-Organization 1 ---- * Workflow
+workspace 1 ---- * Workflow
 
 Opportunity 1 ---- * Workflow
 

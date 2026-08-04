@@ -191,12 +191,12 @@ See `raw-queries.md` for details.
 import { Prisma } from '../generated/client'
 
 // Input types
-type UserCreateInput = Prisma.UserCreateInput
-type UserWhereInput = Prisma.UserWhereInput
+type userCreateInput = Prisma.userCreateInput
+type userWhereInput = Prisma.userWhereInput
 
 // Output types
-type User = Prisma.UserGetPayload<{}>
-type UserWithPosts = Prisma.UserGetPayload<{
+type user = Prisma.userGetPayload<{}>
+type userWithPosts = Prisma.userGetPayload<{
   include: { posts: true }
 }>
 ```
@@ -212,7 +212,7 @@ const userSelect = {
   id: true,
   email: true,
   name: true
-} satisfies Prisma.UserSelect
+} satisfies Prisma.userSelect
 
 const user = await prisma.user.findUnique({
   where: { id: 1 },

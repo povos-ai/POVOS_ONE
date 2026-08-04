@@ -16,7 +16,7 @@ Duration: Day 1–5
 
 - Product Identity
 - MVP Scope
-- User Journey
+- user Journey
 - Screen Map
 - Design System
 
@@ -41,7 +41,7 @@ Duration: Day 6–18
 - AI Copilot
 - Opportunity Hub
 - Enterprise
-- Workspace
+- workspace
 
 Deliverable:
 
@@ -62,7 +62,7 @@ Duration: Day 19–30
 - Database
 - Storage
 - APIs
-- User Management
+- user Management
 
 Deliverable:
 

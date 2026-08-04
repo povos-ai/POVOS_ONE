@@ -27,7 +27,7 @@ Design a single entity model that can support:
 - Enterprise Applications
 - Universities
 - NGOs
-- Political Organizations
+- Political workspaces
 - Healthcare
 - Startup Ecosystems
 - Future Solutions
@@ -106,19 +106,19 @@ This structure applies to every entity within POVOS ONE.
 
 ---
 
-# Entity: Person
+# Entity: user
 
 ## Purpose
 
 Represents any human individual interacting with the platform.
 
-A Person is the canonical representation of an individual, regardless of their role in any module.
+A user is the canonical representation of an individual, regardless of their role in any module.
 
 ---
 
 ## Business Meaning
 
-A Person may become:
+A user may become:
 
 - Citizen
 - Student
@@ -136,7 +136,7 @@ A Person may become:
 
 Roles may change over time.
 
-The Person entity remains the same.
+The user entity remains the same.
 
 ---
 
@@ -170,10 +170,10 @@ Archived
 
 ## Relationships
 
-A Person may have:
+A user may have:
 
-- One or more User Accounts
-- Membership in one or more Organizations
+- One or more user Accounts
+- Membership in one or more workspaces
 - Multiple Opportunities Applied
 - Multiple Documents
 - Multiple Skills
@@ -186,7 +186,7 @@ A Person may have:
 
 ## Core Identity
 
-Every Person must have a globally unique Platform ID.
+Every user must have a globally unique Platform ID.
 
 Business identifiers (Employee ID, Student ID, Voter ID, etc.) belong to extensions or linked records, not the canonical identity.
 
@@ -194,7 +194,7 @@ Business identifiers (Employee ID, Student ID, Voter ID, etc.) belong to extensi
 
 ## Permissions
 
-Access to Person data is controlled through Role-Based Access Control (RBAC).
+Access to user data is controlled through Role-Based Access Control (RBAC).
 
 Modules must never bypass platform authorization.
 
@@ -202,7 +202,7 @@ Modules must never bypass platform authorization.
 
 ## Search Metadata
 
-Person records should support search by:
+user records should support search by:
 
 - Name
 - Email
@@ -210,7 +210,7 @@ Person records should support search by:
 - Skills
 - City
 - State
-- Organization
+- workspace
 - Profession
 - Tags
 
@@ -227,7 +227,7 @@ AI services may use:
 - Education
 - Opportunity History
 
-to improve recommendations and personalization.
+to improve recommendations and useralization.
 
 Sensitive information must only be accessed according to authorization rules.
 
@@ -235,7 +235,7 @@ Sensitive information must only be accessed according to authorization rules.
 
 ## Audit Rules
 
-Every change to a Person record must be logged.
+Every change to a user record must be logged.
 
 Audit history includes:
 
@@ -251,25 +251,25 @@ Deletion must be logical (soft delete) unless explicitly authorized.
 
 ## Version Strategy
 
-The canonical definition of Person is maintained by the Platform.
+The canonical definition of user is maintained by the Platform.
 
 Business modules may extend the entity but must not redefine its purpose or identity.
 
 ---
 
-# Entity: Organization
+# Entity: workspace
 
 ## Purpose
 
 Represents any legal, public, private, or community-based entity that creates, manages, owns, or participates in opportunities and platform activities.
 
-An Organization is the canonical representation of an institution, regardless of its industry or sector.
+An workspace is the canonical representation of an institution, regardless of its industry or sector.
 
 ---
 
 ## Business Meaning
 
-An Organization may represent:
+An workspace may represent:
 
 - Government Department
 - Ministry
@@ -280,16 +280,16 @@ An Organization may represent:
 - University
 - School
 - Hospital
-- Political Organization
+- Political workspace
 - Incubator
 - Investor
 - Association
 - Trust
 - Cooperative
 
-Organization types may evolve over time.
+workspace types may evolve over time.
 
-The Organization entity remains the same.
+The workspace entity remains the same.
 
 ---
 
@@ -323,10 +323,10 @@ Archived
 
 ## Relationships
 
-An Organization may have:
+An workspace may have:
 
-- Multiple Users
-- Multiple Members (Persons)
+- Multiple users
+- Multiple Members (users)
 - Multiple Opportunities
 - Multiple Departments
 - Multiple Documents
@@ -334,13 +334,13 @@ An Organization may have:
 - Multiple Workflows
 - Multiple Notifications
 
-A Person may belong to multiple Organizations, and an Organization may have many Persons.
+A user may belong to multiple workspaces, and an workspace may have many users.
 
 ---
 
 ## Core Identity
 
-Every Organization must have a globally unique Platform ID.
+Every workspace must have a globally unique Platform ID.
 
 Business identifiers (Registration Number, GST, CIN, UDISE, etc.) should be stored as linked attributes or extensions, not as the canonical identity.
 
@@ -348,7 +348,7 @@ Business identifiers (Registration Number, GST, CIN, UDISE, etc.) should be stor
 
 ## Permissions
 
-Organizations do not bypass platform security.
+workspaces do not bypass platform security.
 
 Access is controlled through platform roles, permissions, and delegated administration.
 
@@ -356,7 +356,7 @@ Access is controlled through platform roles, permissions, and delegated administ
 
 ## Search Metadata
 
-Organization records should support search by:
+workspace records should support search by:
 
 - Name
 - Type
@@ -372,7 +372,7 @@ Organization records should support search by:
 
 AI services may use:
 
-- Organization Type
+- workspace Type
 - Sector
 - Opportunity History
 - Skills Required
@@ -385,7 +385,7 @@ to provide recommendations, insights, and analytics.
 
 ## Audit Rules
 
-Every change to an Organization record must be audited.
+Every change to an workspace record must be audited.
 
 Audit history includes:
 
@@ -401,7 +401,7 @@ Deletion must be logical (soft delete) unless explicitly authorized.
 
 ## Version Strategy
 
-The canonical definition of Organization is maintained by the Platform.
+The canonical definition of workspace is maintained by the Platform.
 
 Business modules may extend the entity but must not redefine its purpose or identity.
 
@@ -412,7 +412,7 @@ Business modules may extend the entity but must not redefine its purpose or iden
 
 ## Purpose
 
-Represents any discoverable opportunity that enables a Person or Organization to grow, earn, learn, build, collaborate, participate, or receive benefits.
+Represents any discoverable opportunity that enables a user or workspace to grow, earn, learn, build, collaborate, participate, or receive benefits.
 
 Opportunity is the central business entity of the POVOS Opportunities solution.
 
@@ -443,9 +443,9 @@ New opportunity types may be introduced without changing the canonical definitio
 
 ## Owner
 
-Organization
+workspace
 
-Every Opportunity is created, owned, or managed by an Organization.
+Every Opportunity is created, owned, or managed by an workspace.
 
 ---
 
@@ -483,7 +483,7 @@ Archived
 
 An Opportunity may have:
 
-- One Owner Organization
+- One Owner workspace
 - Multiple Applications
 - Multiple Required Documents
 - Multiple Skills
@@ -492,9 +492,9 @@ An Opportunity may have:
 - Multiple Deadlines
 - Multiple Notifications
 
-A Person may apply to multiple Opportunities.
+A user may apply to multiple Opportunities.
 
-An Opportunity may receive applications from multiple Persons.
+An Opportunity may receive applications from multiple users.
 
 ---
 
@@ -508,7 +508,7 @@ Module-specific identifiers may exist but must not replace the canonical identit
 
 ## Permissions
 
-Only authorized Organizations may create or manage Opportunities.
+Only authorized workspaces may create or manage Opportunities.
 
 Visibility, editing, publishing, and archival actions are governed by platform permissions and workflow policies.
 
@@ -521,7 +521,7 @@ Opportunity records should support search by:
 - Title
 - Type
 - Category
-- Organization
+- workspace
 - Location
 - Skills
 - Eligibility
@@ -542,7 +542,7 @@ AI services may use:
 - Historical Applications
 - Completion Outcomes
 
-to provide recommendations, ranking, summaries, and personalized matching.
+to provide recommendations, ranking, summaries, and useralized matching.
 
 ---
 

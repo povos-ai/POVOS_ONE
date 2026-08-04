@@ -10,7 +10,7 @@
 
 Build the world's most extensible, intelligent, secure, and configurable Enterprise Platform Operating System.
 
-POVOS ONE is designed to power governments, enterprises, startups, NGOs, educational institutions, political organizations, and future digital ecosystems from a single platform.
+POVOS ONE is designed to power governments, enterprises, startups, NGOs, educational institutions, political workspaces, and future digital ecosystems from a single platform.
 
 ---
 
@@ -52,7 +52,7 @@ Menus, dashboards, workflows, reports, permissions, forms, and AI behavior shoul
 
 ## Law 2 — Everything is Configurable
 
-Organizations should configure the platform without modifying source code whenever possible.
+workspaces should configure the platform without modifying source code whenever possible.
 
 ---
 
@@ -78,7 +78,7 @@ It is not an optional add-on.
 
 ## Law 6 — Multi-Tenant by Design
 
-The platform must support multiple independent organizations using the same installation while keeping their data isolated.
+The platform must support multiple independent workspaces using the same installation while keeping their data isolated.
 
 ---
 

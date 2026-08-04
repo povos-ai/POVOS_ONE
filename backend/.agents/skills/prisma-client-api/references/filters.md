@@ -154,7 +154,7 @@ where: {
 At least one related record matches:
 
 ```typescript
-// Users with at least one published post
+// users with at least one published post
 where: {
   posts: {
     some: { published: true }
@@ -167,7 +167,7 @@ where: {
 All related records match:
 
 ```typescript
-// Users where all posts are published
+// users where all posts are published
 where: {
   posts: {
     every: { published: true }
@@ -180,7 +180,7 @@ where: {
 No related records match:
 
 ```typescript
-// Users with no published posts
+// users with no published posts
 where: {
   posts: {
     none: { published: true }
@@ -191,14 +191,14 @@ where: {
 ### is / isNot (1-to-1)
 
 ```typescript
-// Users with profile in specific country
+// users with profile in specific country
 where: {
   profile: {
     is: { country: 'USA' }
   }
 }
 
-// Users without profile
+// users without profile
 where: {
   profile: {
     isNot: null

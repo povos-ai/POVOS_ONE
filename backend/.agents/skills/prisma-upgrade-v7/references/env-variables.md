@@ -33,7 +33,7 @@ export default defineConfig({
 })
 ```
 
-## Bun Users
+## Bun users
 
 Bun automatically loads `.env` files. No additional setup needed:
 

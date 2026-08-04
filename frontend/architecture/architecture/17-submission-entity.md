@@ -10,7 +10,7 @@ Owner: Platform Architecture
 
 # Purpose
 
-Represents a formal response from a Person or Organization to an Opportunity.
+Represents a formal response from a user or workspace to an Opportunity.
 
 A Submission captures the complete lifecycle of participation, evaluation, and outcome.
 
@@ -39,8 +39,8 @@ The business label may vary by module, but the canonical entity remains Submissi
 
 A Submission may be created by:
 
-- Person
-- Organization
+- user
+- workspace
 
 Exactly one applicant must exist for every Submission.
 
@@ -108,7 +108,7 @@ A Submission may contain:
 
 Applicants can view and manage their own Submissions according to workflow rules.
 
-Organizations can review only the Submissions they are authorized to access.
+workspaces can review only the Submissions they are authorized to access.
 
 ---
 
@@ -120,7 +120,7 @@ Submission records should support search by:
 - Opportunity
 - Status
 - Submission Date
-- Organization
+- workspace
 - Tags
 
 ---

@@ -1,0 +1,12 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "cd backend && npm install && npm run build",
+    "watchPatterns": ["backend/**/*"]
+  },
+  "deploy": {
+    "startCommand": "cd backend && npm run start:prod",
+    "healthcheckPath": "/health",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}

@@ -1,4 +1,4 @@
-﻿const opportunities = [
+const opportunities = [
   {
     title: "PMEGP Loan Scheme",
     category: "Government",

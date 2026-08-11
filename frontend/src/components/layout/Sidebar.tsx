@@ -45,13 +45,13 @@ export default function Sidebar() {
         collapsed ? "w-16" : "w-60"
       }`}
     >
-      <div className="py-5 px-3 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
+      <div className="border-4 border-red-500 py-5 px-3 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
         {!collapsed ? (
-          <div className="flex items-center justify-center w-full">
+          <div className="border-4 border-red-500 flex items-center justify-center w-full">
             <img
               src="/logo.png"
               alt="POVOS ONE Logo"
-              className="h-16 w-auto max-w-[160px] object-contain"
+              className="border-4 border-red-500 h-16 w-auto max-w-[160px] object-contain"
               onError={(e) => {
                 e.currentTarget.src =
                   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='64' viewBox='0 0 160 64'%3E%3Crect width='160' height='64' rx='8' fill='%231557C0'/%3E%3Ctext x='16' y='40' font-family='Arial' font-size='26' fill='white' font-weight='bold'%3EPOVOS ONE%3C/text%3E%3C/svg%3E";
@@ -59,11 +59,11 @@ export default function Sidebar() {
             />
           </div>
         ) : (
-          <div className="w-full flex justify-center">
+          <div className="border-4 border-red-500 w-full flex justify-center">
             <img
               src="/logo.png"
               alt="POVOS ONE Logo"
-              className="h-10 w-auto object-contain"
+              className="border-4 border-red-500 h-10 w-auto object-contain"
               onError={(e) => {
                 e.currentTarget.src =
                   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%231557C0'/%3E%3Ctext x='8' y='28' font-family='Arial' font-size='18' fill='white' font-weight='bold'%3EP%3C/text%3E%3C/svg%3E";
@@ -73,13 +73,13 @@ export default function Sidebar() {
         )}
         <button
           onClick={toggle}
-          className="p-1 rounded hover:bg-gray-100 transition flex-shrink-0 ml-2"
+          className="border-4 border-red-500 p-1 rounded hover:bg-gray-100 transition flex-shrink-0 ml-2"
         >
           {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
         </button>
       </div>
 
-      <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto min-h-0">
+      <nav className="border-4 border-red-500 flex-1 p-2 space-y-0.5 overflow-y-auto min-h-0">
         {navItems.map((item) => {
           const active = isActive(item.href);
           return (
@@ -92,27 +92,28 @@ export default function Sidebar() {
                   : "text-gray-600 hover:bg-gray-100"
               } ${collapsed ? "justify-center" : ""}`}
             >
-              <item.icon size={18} className="flex-shrink-0" />
-              {!collapsed && <span className="text-sm truncate">{item.label}</span>}
+              <item.icon size={18} className="border-4 border-red-500 flex-shrink-0" />
+              {!collapsed && <span className="border-4 border-red-500 text-sm truncate">{item.label}</span>}
             </Link>
           );
         })}
       </nav>
 
-      <div className="p-2 border-t border-gray-200 flex-shrink-0">
+      <div className="border-4 border-red-500 p-2 border-t border-gray-200 flex-shrink-0">
         <button
           onClick={handleLogout}
           className={`flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50 text-red-600 transition w-full ${
             collapsed ? "justify-center" : ""
           }`}
         >
-          <LogOut size={18} className="flex-shrink-0" />
-          {!collapsed && <span className="text-sm font-medium truncate">Logout</span>}
+          <LogOut size={18} className="border-4 border-red-500 flex-shrink-0" />
+          {!collapsed && <span className="border-4 border-red-500 text-sm font-medium truncate">Logout</span>}
         </button>
       </div>
     </aside>
   );
 }
+
 
 
 

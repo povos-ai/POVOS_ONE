@@ -7,9 +7,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import KPIGrid from "@/components/dashboard/KPIGrid";
 import Recommendations from "@/components/dashboard/Recommendations";
 import AIIntelligence from "@/components/dashboard/AIIntelligence";
-import Deadlines from "@/components/dashboard/Deadlines";
-import RecentApplications from "@/components/dashboard/RecentApplications";
-import NextAction from "@/components/dashboard/NextAction";
+import QuickActions from "@/components/dashboard/QuickActions";
 
 export default function DashboardPage() {
   const router = useRouter();
@@ -28,32 +26,31 @@ export default function DashboardPage() {
   }, [router]);
 
   if (loading) {
-    return <AppShell><div className="flex justify-center items-center h-screen">Loading dashboard...</div></AppShell>;
+    return <AppShell><div className="flex justify-center items-center h-full">Loading...</div></AppShell>;
   }
 
   return (
     <AppShell>
-      <div className="p-4 md:p-6 max-w-7xl mx-auto">
+      <div className="h-full flex flex-col">
         <DashboardHeader user={user} />
-        <KPIGrid />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-          <div className="lg:col-span-2">
-            <Recommendations />
+        <div className="flex-1 overflow-y-auto space-y-4">
+          {/* KPI Grid */}
+          <KPIGrid />
+
+          {/* Main Grid: Recommendations + AI Intelligence */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+            <div className="lg:col-span-2">
+              <Recommendations />
+            </div>
+            <div>
+              <AIIntelligence />
+            </div>
           </div>
-          <div>
-            <AIIntelligence />
-          </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-          <Deadlines />
-          <RecentApplications />
-          <NextAction />
+
+          {/* Quick Actions */}
+          <QuickActions />
         </div>
       </div>
     </AppShell>
   );
 }
-
-
-
-

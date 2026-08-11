@@ -14,10 +14,10 @@ export default function Recommendations() {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
-      .then((data) => {
+      .then((data) => { const list = Array.isArray(data) ? data : data.items || [];
         const scored = (data || []).map((opp) => ({
           ...opp,
-          matchScore: Math.floor(Math.random() * 30 + 70),
+          matchScore: opp.matchScore || 0,
         }));
         setOpportunities(scored.slice(0, 5));
       })
@@ -45,7 +45,7 @@ export default function Recommendations() {
     <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-lg font-semibold text-gray-800">✨ Recommended for You</h2>
+          <h2 className="text-lg font-semibold text-gray-800">âœ¨ Recommended for You</h2>
           <p className="text-xs text-gray-500">AI-matched based on your profile</p>
         </div>
         <Link href="/opportunities" className="text-sm text-blue-600 hover:underline">View all ({opportunities.length})</Link>
@@ -80,3 +80,5 @@ export default function Recommendations() {
     </div>
   );
 }
+
+

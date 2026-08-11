@@ -5,15 +5,15 @@ services:
     image: postgres:16-alpine
     container_name: povos_postgres
     environment:
-      POSTGRES_user: povos_user
+      POSTGRES_USER: povos_user
       POSTGRES_PASSWORD: povos_password
       POSTGRES_DB: povos_one
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U povos_user"]
+      test: ["CMD-SHELL", "pg_isready -U povos_user -d povos_one"]
       interval: 10s
       timeout: 5s
       retries: 5

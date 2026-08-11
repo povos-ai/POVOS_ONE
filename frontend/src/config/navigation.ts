@@ -1,4 +1,4 @@
-import {
+﻿import {
   LayoutDashboard,
   Briefcase,
   FileText,
@@ -59,3 +59,4 @@ export const navigation: NavigationItem[] = [
     enabled: true,
   },
 ];
+

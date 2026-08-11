@@ -1,4 +1,4 @@
-# POVOS ONE - Entity: Submission
+# <PovosText className="text-2xl" /> - Entity: Submission
 
 Version: 1.0.0
 

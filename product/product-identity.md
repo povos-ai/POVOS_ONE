@@ -1,4 +1,4 @@
-# POVOS ONE
+# <PovosText className="text-2xl" />
 
 > One Platform. Unlimited Opportunities.
 
@@ -6,7 +6,7 @@
 
 # Product Information
 
-**Product Name:** POVOS ONE
+**Product Name:** <PovosText className="text-2xl" />
 
 **Version:** 1.0
 

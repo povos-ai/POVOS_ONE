@@ -1,8 +1,8 @@
-# POVOS ONE Architecture
+# <PovosText className="text-2xl" /> Architecture
 
 ## Vision
 
-POVOS ONE is an AI-powered Opportunity Intelligence Operating System designed to help citizens, businesses, political workspaces, researchers, students, entrepreneurs, and institutions discover, analyze, and act on opportunities from a single platform.
+<PovosText className="text-2xl" /> is an AI-powered Opportunity Intelligence Operating System designed to help citizens, businesses, political workspaces, researchers, students, entrepreneurs, and institutions discover, analyze, and act on opportunities from a single platform.
 
 The architecture is designed to be modular, scalable, secure, and enterprise-ready.
 
@@ -25,7 +25,7 @@ The architecture is designed to be modular, scalable, secure, and enterprise-rea
 
 # High Level Architecture
 
-POVOS ONE
+<PovosText className="text-2xl" />
 
 ├── Authentication
 

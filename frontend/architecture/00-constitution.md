@@ -1,4 +1,4 @@
-# POVOS ONE Constitution
+# <PovosText className="text-2xl" /> Constitution
 
 > **Version:** 1.0.0  
 > **Status:** Draft  
@@ -10,7 +10,7 @@
 
 Build the world's most extensible, intelligent, secure, and configurable Enterprise Platform Operating System.
 
-POVOS ONE is designed to power governments, enterprises, startups, NGOs, educational institutions, political workspaces, and future digital ecosystems from a single platform.
+<PovosText className="text-2xl" /> is designed to power governments, enterprises, startups, NGOs, educational institutions, political workspaces, and future digital ecosystems from a single platform.
 
 ---
 
@@ -24,9 +24,9 @@ The Platform Kernel should remain stable while unlimited business capabilities c
 
 # 3. Core Philosophy
 
-POVOS ONE is not a single application.
+<PovosText className="text-2xl" /> is not a single application.
 
-POVOS ONE is a Platform.
+<PovosText className="text-2xl" /> is a Platform.
 
 Applications are built on the Platform.
 
@@ -120,7 +120,7 @@ Layer 6 — Marketplace
 
 # 7. Long-Term Objective
 
-POVOS ONE shall become a universal Enterprise Platform Operating System capable of serving any industry without redesigning its Platform Kernel.
+<PovosText className="text-2xl" /> shall become a universal Enterprise Platform Operating System capable of serving any industry without redesigning its Platform Kernel.
 
 ---
 

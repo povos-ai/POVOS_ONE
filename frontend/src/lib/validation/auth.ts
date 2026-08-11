@@ -1,4 +1,4 @@
-import type {
+﻿import type {
   LoginRequest,
   RegisterRequest,
   ForgotPasswordRequest,
@@ -106,3 +106,4 @@ export function validateResetPassword(
     errors,
   };
 }
+

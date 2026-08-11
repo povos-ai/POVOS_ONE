@@ -1,7 +1,12 @@
 ﻿node_modules
 dist
-logs
 .env
+.env.local
+.env.production
 .git
+.gitignore
+README.md
+Dockerfile
+.dockerignore
+logs
 *.log
-coverage

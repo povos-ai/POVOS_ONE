@@ -1,4 +1,4 @@
-# POVOS ONE Database Blueprint
+# <PovosText className="text-2xl" /> Database Blueprint
 
 Version: 1.0.0
 
@@ -8,7 +8,7 @@ Status: Draft
 
 # Philosophy
 
-The database is the foundation of the POVOS ONE Platform.
+The database is the foundation of the <PovosText className="text-2xl" /> Platform.
 
 The Platform Kernel must remain stable.
 

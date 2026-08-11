@@ -75,7 +75,7 @@ async function main() {
     create: {
       name: 'POVOS Platform',
       slug: 'povos-platform',
-      description: 'Main POVOS ONE Platform',
+      description: 'Main <PovosText className="text-2xl" /> Platform',
       isActive: true,
       createdById: adminUser.id,
     },

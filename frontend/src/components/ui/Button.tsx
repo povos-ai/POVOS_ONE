@@ -1,42 +1,36 @@
-import { ButtonHTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
+﻿import { ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "danger";
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariant;
+interface ButtonProps {
+  children: ReactNode;
+  variant?: "primary" | "secondary" | "ai" | "outline";
+  size?: "sm" | "md";
+  className?: string;
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
-export default function Button({
-  children,
-  variant = "primary",
-  className,
-  ...props
-}: ButtonProps) {
-  const variants = {
-    primary:
-      "bg-blue-600 text-white hover:bg-blue-700",
+const variantMap = {
+  primary: "bg-blue-600 hover:bg-blue-700 text-white",
+  secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
+  ai: "bg-indigo-600 hover:bg-indigo-700 text-white",
+  outline: "border border-gray-300 hover:bg-gray-50 text-gray-700",
+};
 
-    secondary:
-      "bg-slate-200 text-slate-900 hover:bg-slate-300",
+const sizeMap = {
+  sm: "px-3 py-1 text-xs",
+  md: "px-4 py-2 text-sm",
+};
 
-    outline:
-      "border border-slate-300 bg-white hover:bg-slate-100",
-
-    danger:
-      "bg-red-600 text-white hover:bg-red-700",
-  };
-
+export function Button({ children, variant = "primary", size = "md", className = "", onClick, disabled }: ButtonProps) {
   return (
     <button
-      className={cn(
-        "rounded-xl px-5 py-2.5 font-medium transition-all",
-        variants[variant],
-        className
-      )}
-      {...props}
+      className={`rounded-lg font-semibold transition shadow-sm focus:outline-none ${variantMap[variant]} ${sizeMap[size]} ${className}`}
+      onClick={onClick}
+      disabled={disabled}
     >
       {children}
     </button>
   );
 }
+
+

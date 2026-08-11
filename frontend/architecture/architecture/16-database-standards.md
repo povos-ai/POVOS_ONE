@@ -1,4 +1,4 @@
-# POVOS ONE - Database Standards
+# <PovosText className="text-2xl" /> - Database Standards
 
 Version: 1.0.0
 

@@ -1,4 +1,4 @@
-# POVOS ONE - TODO
+# <PovosText className="text-2xl" /> - TODO
 
 Version: 1.0
 

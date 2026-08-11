@@ -1,4 +1,4 @@
-# POVOS ONE Platform Vision
+# <PovosText className="text-2xl" /> Platform Vision
 
 Version: 1.0.0
 
@@ -8,7 +8,7 @@ Status: Draft
 
 # Platform Definition
 
-POVOS ONE is a Universal Enterprise Platform Operating System.
+<PovosText className="text-2xl" /> is a Universal Enterprise Platform Operating System.
 
 It is not a business application.
 

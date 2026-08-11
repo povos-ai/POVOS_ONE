@@ -1,83 +1,119 @@
-"use client";
+﻿"use client";
 
+import { useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { navigation } from "@/config/navigation";
+import {
+  LayoutDashboard,
+  Briefcase,
+  Users,
+  BarChart3,
+  Settings,
+  User,
+  LogOut,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export default function Sidebar() {
+  const router = useRouter();
   const pathname = usePathname();
+  const [collapsed, setCollapsed] = useState(false);
+
+  const toggle = () => setCollapsed(!collapsed);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+    router.push("/login");
+  };
+
+  const navItems = [
+    { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { href: "/opportunities", label: "Opportunities", icon: Briefcase },
+    { href: "/my-applications", label: "Applications", icon: Users },
+    { href: "/admin/applications", label: "Admin", icon: BarChart3 },
+    { href: "/settings", label: "Settings", icon: Settings },
+    { href: "/profile", label: "Profile", icon: User },
+  ];
+
+  const isActive = (path: string) => pathname === path || pathname?.startsWith(path + '/');
 
   return (
-    <aside className="flex h-screen w-72 flex-col border-r border-zinc-800 bg-zinc-950 text-white">
-
-      {/* Logo */}
-      <div className="border-b border-zinc-800 px-8 py-8">
-        <h1 className="text-3xl font-bold tracking-wide">
-          POVOS ONE
-        </h1>
-
-        <p className="mt-2 text-sm text-zinc-400">
-          Enterprise Platform
-        </p>
+    <aside
+      className={`bg-white border-r border-gray-200 flex-shrink-0 flex flex-col h-full overflow-hidden transition-all duration-300 ${
+        collapsed ? "w-16" : "w-60"
+      }`}
+    >
+      <div className="py-5 px-3 border-b border-gray-200 flex items-center justify-between flex-shrink-0">
+        {!collapsed ? (
+          <div className="flex items-center justify-center w-full">
+            <img
+              src="/logo.png"
+              alt="POVOS ONE Logo"
+              className="h-16 w-auto max-w-[160px] object-contain"
+              onError={(e) => {
+                e.currentTarget.src =
+                  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='64' viewBox='0 0 160 64'%3E%3Crect width='160' height='64' rx='8' fill='%231557C0'/%3E%3Ctext x='16' y='40' font-family='Arial' font-size='26' fill='white' font-weight='bold'%3EPOVOS ONE%3C/text%3E%3C/svg%3E";
+              }}
+            />
+          </div>
+        ) : (
+          <div className="w-full flex justify-center">
+            <img
+              src="/logo.png"
+              alt="POVOS ONE Logo"
+              className="h-10 w-auto object-contain"
+              onError={(e) => {
+                e.currentTarget.src =
+                  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%231557C0'/%3E%3Ctext x='8' y='28' font-family='Arial' font-size='18' fill='white' font-weight='bold'%3EP%3C/text%3E%3C/svg%3E";
+              }}
+            />
+          </div>
+        )}
+        <button
+          onClick={toggle}
+          className="p-1 rounded hover:bg-gray-100 transition flex-shrink-0 ml-2"
+        >
+          {collapsed ? <ChevronRight size={20} /> : <ChevronLeft size={20} />}
+        </button>
       </div>
 
-      {/* Navigation */}
-      <nav className="flex-1 overflow-y-auto px-4 py-6">
-
-        <div className="space-y-2">
-
-          {navigation
-            .filter((item) => item.enabled)
-            .map((item) => {
-              const Icon = item.icon;
-              const active = pathname === item.href;
-
-              return (
-                <Link
-                  key={item.id}
-                  href={item.href}
-                  className={`group flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${
-                    active
-                      ? "bg-blue-600 text-white shadow-lg"
-                      : "text-zinc-300 hover:bg-zinc-900 hover:text-white"
-                  }`}
-                >
-                  <Icon size={20} />
-
-                  <div className="flex flex-col">
-                    <span className="font-medium">
-                      {item.title}
-                    </span>
-
-                    <span className="text-xs opacity-70">
-                      {item.module}
-                    </span>
-                  </div>
-                </Link>
-              );
-            })}
-
-        </div>
-
+      <nav className="flex-1 p-2 space-y-0.5 overflow-y-auto min-h-0">
+        {navItems.map((item) => {
+          const active = isActive(item.href);
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`flex items-center gap-2 px-3 py-2 rounded-lg transition focus:outline-none ${
+                active
+                  ? "bg-blue-50 text-blue-700 font-medium"
+                  : "text-gray-600 hover:bg-gray-100"
+              } ${collapsed ? "justify-center" : ""}`}
+            >
+              <item.icon size={18} className="flex-shrink-0" />
+              {!collapsed && <span className="text-sm truncate">{item.label}</span>}
+            </Link>
+          );
+        })}
       </nav>
 
-      {/* Footer */}
-      <div className="border-t border-zinc-800 p-6">
-
-        <div className="rounded-xl bg-zinc-900 p-4">
-
-          <div className="font-semibold">
-            POVOS ONE
-          </div>
-
-          <div className="mt-1 text-sm text-zinc-400">
-            Version 1.0 Enterprise
-          </div>
-
-        </div>
-
+      <div className="p-2 border-t border-gray-200 flex-shrink-0">
+        <button
+          onClick={handleLogout}
+          className={`flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-red-50 text-red-600 transition w-full ${
+            collapsed ? "justify-center" : ""
+          }`}
+        >
+          <LogOut size={18} className="flex-shrink-0" />
+          {!collapsed && <span className="text-sm font-medium truncate">Logout</span>}
+        </button>
       </div>
-
     </aside>
   );
 }
+
+
+
+

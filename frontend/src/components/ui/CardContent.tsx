@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+﻿import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface CardContentProps {
@@ -22,3 +22,4 @@ export default function CardContent({
     </div>
   );
 }
+

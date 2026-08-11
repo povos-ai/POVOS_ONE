@@ -1,120 +1,131 @@
-'use client';
+﻿"use client";
 
-import { useState } from 'react';
-import { userouter } from 'next/navigation';
-import authService from '@/services/auth.service';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function RegisterPage() {
-  const router = userouter();
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    phone: '',
-  });
-  const [error, setError] = useState('');
+  const router = useRouter();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
     setLoading(true);
-
+    setError((((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" instanceof Error ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong".message : (typeof (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" === "string" ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" : JSON.stringify((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" instanceof Error ? ((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" instanceof Error ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong".message : (typeof (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" === "string" ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" : JSON.stringify((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong".message : (typeof ((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" instanceof Error ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong".message : (typeof (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" === "string" ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" : JSON.stringify((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" === "string" ? ((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" instanceof Error ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong".message : (typeof (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" === "string" ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" : JSON.stringify((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" instanceof Error ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong".message : (typeof (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" === "string" ? (JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong" : JSON.stringify((JSON.stringify(""?.message || "Something went wrong" instanceof Error ? JSON.stringify(""?.message || "Something went wrong".message : (typeof JSON.stringify(""?.message || "Something went wrong" === "string" ? JSON.stringify(""?.message || "Something went wrong" : JSON.stringify(JSON.stringify(""?.message || "Something went wrong")))))))))));
+    setSuccess("");
+    if (password !== confirmPassword) {
+      setError((((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? ((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof ((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? ((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? (JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify((JSON.stringify("Passwords do not match"?.message || "Something went wrong" instanceof Error ? JSON.stringify("Passwords do not match"?.message || "Something went wrong".message : (typeof JSON.stringify("Passwords do not match"?.message || "Something went wrong" === "string" ? JSON.stringify("Passwords do not match"?.message || "Something went wrong" : JSON.stringify(JSON.stringify("Passwords do not match"?.message || "Something went wrong")))))))))));
+      setLoading(false);
+      return;
+    }
     try {
-      await authService.register(formData);
-      router.push('/login?registered=true');
+      const res = await fetch("http://192.168.1.8:3001/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ firstName, lastName, email, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.message || "Registration failed");
+      }
+      setSuccess("Registration successful! Please log in.");
+      setTimeout(() => router.push("/login"), 2000);
     } catch (err: any) {
-      setError(err.response?.data?.message || 'Registration failed');
-    } finally {
+      setError((((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong".message : (typeof (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" === "string" ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? ((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong".message : (typeof (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" === "string" ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong".message : (typeof ((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong".message : (typeof (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" === "string" ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" === "string" ? ((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong".message : (typeof (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" === "string" ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong".message : (typeof (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" === "string" ? (JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify((JSON.stringify(err.message?.message || "Something went wrong" instanceof Error ? JSON.stringify(err.message?.message || "Something went wrong".message : (typeof JSON.stringify(err.message?.message || "Something went wrong" === "string" ? JSON.stringify(err.message?.message || "Something went wrong" : JSON.stringify(JSON.stringify(err.message?.message || "Something went wrong")))))))))));
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
-        <h2 className="text-3xl font-bold text-center">Create Account</h2>
-        <p className="text-center text-gray-600">Register for POVOS ONE</p>
-
-        {error && (
-          <div className="bg-red-100 text-red-700 p-3 rounded">{error}</div>
-        )}
-
+    <div className="flex min-h-screen items-center justify-center bg-gray-50">
+      <div className="w-full max-w-md bg-white rounded-xl shadow-sm p-8">
+        <h1 className="text-2xl font-bold text-center text-gray-800">POVOS ONE</h1>
+        <p className="text-center text-sm text-gray-500 mb-6">Create your account</p>
+        {error && <div className="bg-red-50 text-red-600 p-2 rounded text-sm mb-4">{error}</div>}
+        {success && <div className="bg-green-50 text-green-600 p-2 rounded text-sm mb-4">{success}</div>}
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-2 gap-2">
             <div>
               <label className="block text-sm font-medium text-gray-700">First Name</label>
               <input
                 type="text"
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">Last Name</label>
               <input
                 type="text"
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                 required
-                className="mt-1 block w-full border border-gray-300 rounded-md p-2"
               />
             </div>
           </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700">Email</label>
             <input
               type="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
             />
           </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Phone</label>
-            <input
-              type="tel"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              required
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-              placeholder="9876543210"
-            />
-          </div>
-
           <div>
             <label className="block text-sm font-medium text-gray-700">Password</label>
             <input
               type="password"
-              value={formData.password}
-              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
             />
           </div>
-
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Confirm Password</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+              required
+            />
+          </div>
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 disabled:bg-blue-300"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
           >
-            {loading ? 'Creating account...' : 'Register'}
+            {loading ? "Registering..." : "Register"}
           </button>
         </form>
-
-        <p className="text-center text-sm text-gray-600">
-          Already have an account?{' '}
-          <a href="/login" className="text-blue-600 hover:underline">
-            Sign In
-          </a>
-        </p>
+        <div className="mt-4 text-center text-sm text-gray-500">
+          Already have an account? <Link href="/login" className="text-blue-600 hover:underline">Sign in</Link>
+        </div>
       </div>
     </div>
   );
 }
+
+
+
+
+
+
+
+
+
+
+

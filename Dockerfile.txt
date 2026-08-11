@@ -1,0 +1,99 @@
+# ============================================
+# DATABASE
+# ============================================
+DATABASE_URL="postgresql://postgres:postgres@postgres:5432/povos_one?schema=public"
+
+# ============================================
+# SERVER
+# ============================================
+PORT=3001
+NODE_ENV=development
+
+# ============================================
+# JWT AUTHENTICATION
+# ============================================
+JWT_SECRET="POVOS_ONE_SUPER_SECRET_2026_CHANGE_IN_PRODUCTION"
+JWT_EXPIRES_IN="7d"
+JWT_REFRESH_SECRET="POVOS_ONE_REFRESH_SECRET_2026"
+JWT_REFRESH_EXPIRES_IN="30d"
+
+# ============================================
+# EMAIL (SMTP) - Optional
+# ============================================
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT=587
+SMTP_SECURE=false
+SMTP_USER="your-email@gmail.com"
+SMTP_PASSWORD="your-app-password"
+SMTP_FROM="POVOS ONE <noreply@povosone.com>"
+
+# ============================================
+# AI & ML SERVICES - Optional (Add if you have keys)
+# ============================================
+GEMINI_API_KEY="your-valid-gemini-api-key"
+OPENAI_API_KEY="your-openai-api-key"
+HUGGINGFACE_API_KEY="your-huggingface-key"
+
+# ============================================
+# REDIS (For Caching - Optional)
+# ============================================
+REDIS_HOST="localhost"
+REDIS_PORT=6379
+REDIS_PASSWORD=""
+REDIS_TTL=3600
+
+# ============================================
+# RATE LIMITING
+# ============================================
+THROTTLE_TTL=60
+THROTTLE_LIMIT=100
+
+# ============================================
+# FRONTEND / CORS
+# ============================================
+ALLOWED_ORIGINS="http://localhost:3000,http://localhost:3002"
+CLIENT_URL="http://localhost:3000"
+
+# ============================================
+# FILE UPLOAD
+# ============================================
+MAX_FILE_SIZE=5242880
+UPLOAD_DIR="./uploads"
+
+# ============================================
+# LOGGING
+# ============================================
+LOG_LEVEL="info"
+LOG_FILE_PATH="./logs"
+
+# ============================================
+# SECURITY
+# ============================================
+BCRYPT_SALT_ROUNDS=10
+SESSION_SECRET="your-session-secret"
+
+# ============================================
+# FEATURE FLAGS
+# ============================================
+ENABLE_AI=true
+ENABLE_EMAIL_VERIFICATION=false
+ENABLE_SMS_VERIFICATION=false
+ENABLE_CACHE=true
+ENABLE_CRON_JOBS=true
+
+# ============================================
+# THIRD-PARTY SERVICES (Optional)
+# ============================================
+# Google OAuth
+GOOGLE_CLIENT_ID="your-google-client-id"
+GOOGLE_CLIENT_SECRET="your-google-client-secret"
+
+# Payment Gateway
+RAZORPAY_KEY_ID="your-razorpay-key-id"
+RAZORPAY_KEY_SECRET="your-razorpay-key-secret"
+
+# ============================================
+# DEPLOYMENT SPECIFIC
+# ============================================
+# For Docker / Fly.io
+HOST="0.0.0.0"

@@ -1,4 +1,4 @@
-# POVOS ONE - Master Project Roadmap
+# <PovosText className="text-2xl" /> - Master Project Roadmap
 
 Version: 1.0
 Status: In Development
@@ -7,7 +7,7 @@ Status: In Development
 
 # Vision
 
-POVOS ONE is an AI-powered enterprise platform that helps individuals, businesses, startups, institutions, and governments discover opportunities, manage work, automate processes, and make better decisions.
+<PovosText className="text-2xl" /> is an AI-powered enterprise platform that helps individuals, businesses, startups, institutions, and governments discover opportunities, manage work, automate processes, and make better decisions.
 
 ---
 
@@ -150,4 +150,4 @@ Every feature must include:
 
 # Long-Term Goal
 
-Build POVOS ONE into a world-class AI-powered enterprise platform with modular architecture that can continuously evolve without requiring major rewrites.
+Build <PovosText className="text-2xl" /> into a world-class AI-powered enterprise platform with modular architecture that can continuously evolve without requiring major rewrites.

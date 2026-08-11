@@ -1,4 +1,4 @@
-# POVOS ONE
+# <PovosText className="text-2xl" />
 
 One Platform. Unlimited Opportunities.
 

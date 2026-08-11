@@ -1,4 +1,4 @@
-# POVOS ONE Platform Kernel
+# <PovosText className="text-2xl" /> Platform Kernel
 
 Version: 1.0.0
 
@@ -8,7 +8,7 @@ Status: Draft
 
 # Purpose
 
-The Platform Kernel is the permanent core of POVOS ONE.
+The Platform Kernel is the permanent core of <PovosText className="text-2xl" />.
 
 It provides the foundational services that every capability, framework, module, and extension depends upon.
 

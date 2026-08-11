@@ -2,7 +2,7 @@ Clear-Host
 
 Write-Host ""
 Write-Host "==========================================" -ForegroundColor Cyan
-Write-Host "        POVOS ONE PROJECT REPORT" -ForegroundColor Green
+Write-Host "        <PovosText className="text-2xl" /> PROJECT REPORT" -ForegroundColor Green
 Write-Host "==========================================" -ForegroundColor Cyan
 
 Write-Host ""

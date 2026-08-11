@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+﻿import { ReactNode } from "react";
 import Card from "@/components/ui/Card";
 import CardHeader from "@/components/ui/CardHeader";
 import CardContent from "@/components/ui/CardContent";
@@ -34,3 +34,4 @@ export default function AuthCard({
     </div>
   );
 }
+

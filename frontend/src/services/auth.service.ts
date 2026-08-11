@@ -1,4 +1,4 @@
-import api from './api';
+﻿import api from './api';
 
 export interface LoginData {
   email: string;
@@ -28,9 +28,9 @@ export const authService = {
   },
 
   async login(data: LoginData) {
-    console.log('🔑 Login called with:', data.email);
+    console.log('ðŸ”‘ Login called with:', data.email);
     const response = await api.post('/api/auth/login', data);
-    console.log('📨 Login response:', response.data);
+    console.log('ðŸ“¨ Login response:', response.data);
     
     if (response.data.accessToken) {
       localStorage.setItem('accessToken', response.data.accessToken);
@@ -56,3 +56,4 @@ export const authService = {
 };
 
 export default authService;
+

@@ -1,22 +1,35 @@
-﻿# Build stage
-FROM node:20-alpine AS builder
+﻿# ============================================
+# STAGE 1: Development Dependencies
+# ============================================
+FROM node:20-alpine AS dev
 
 WORKDIR /app
 COPY package*.json ./
 COPY prisma ./prisma/
 
+# Install all dependencies (including dev)
 RUN npm install
-COPY . .
-RUN npm run build
 
-# Production stage
-FROM node:20-alpine
+COPY . .
+
+# Generate Prisma Client
+RUN npx prisma generate
+
+# ============================================
+# STAGE 2: Production (Run with ts-node)
+# ============================================
+FROM node:20-slim
 
 WORKDIR /app
-COPY package*.json ./
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/prisma ./prisma
 
+# Install OpenSSL for Prisma
+RUN apt-get update -y && apt-get install -y openssl && apt-get clean
+
+# Copy all files from dev stage
+COPY --from=dev /app ./
+
+# Expose port
 EXPOSE 3001
-CMD [\"node\", \"dist/main\"]
+
+# Run directly with ts-node (no build needed)
+CMD ["npx", "ts-node", "src/main.ts"]

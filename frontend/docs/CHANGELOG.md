@@ -1,4 +1,4 @@
-# POVOS ONE - CHANGELOG
+# <PovosText className="text-2xl" /> - CHANGELOG
 
 All notable changes to this project will be documented here.
 

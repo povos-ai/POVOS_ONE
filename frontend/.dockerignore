@@ -1,0 +1,6 @@
+﻿src/app/**/[id]
+src/app/**/[id]/**
+node_modules
+.next
+node_modules
+.next

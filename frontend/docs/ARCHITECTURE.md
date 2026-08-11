@@ -1,4 +1,4 @@
-# POVOS ONE - Technical Architecture
+# <PovosText className="text-2xl" /> - Technical Architecture
 
 Version: 1.0
 
@@ -6,7 +6,7 @@ Version: 1.0
 
 # Architecture Style
 
-POVOS ONE follows a modular enterprise architecture.
+<PovosText className="text-2xl" /> follows a modular enterprise architecture.
 
 Goals:
 
@@ -147,7 +147,7 @@ Rule:
 
 # Long-Term Vision
 
-POVOS ONE should be capable of supporting:
+<PovosText className="text-2xl" /> should be capable of supporting:
 
 - Individuals
 - Businesses

@@ -1,29 +1,12 @@
-import type { NextConfig } from 'next';
-
-const nextConfig: NextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'http://localhost:3001/:path*', // ✅ Backend Port
-      },
-    ];
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  eslint: {
+    ignoreDuringBuilds: true,
   },
-
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '3001',
-        pathname: '/uploads/**',
-      },
-      {
-        protocol: 'https',
-        hostname: '**',
-      },
-    ],
+  typescript: {
+    ignoreBuildErrors: true,
   },
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig	

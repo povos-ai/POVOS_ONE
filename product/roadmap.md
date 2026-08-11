@@ -1,6 +1,6 @@
-# POVOS ONE Roadmap
+# <PovosText className="text-2xl" /> Roadmap
 
-Product: POVOS ONE
+Product: <PovosText className="text-2xl" />
 
 Tagline: One Platform. Unlimited Opportunities.
 
@@ -123,4 +123,4 @@ Duration: Day 43–45
 
 Deliverable:
 
-POVOS ONE MVP Live
+<PovosText className="text-2xl" /> MVP Live

@@ -1,75 +1,13 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-  --card-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-  --glass-bg: rgba(255, 255, 255, 0.7);
-}
-
-body {
-  font-family: 'Inter', sans-serif;
-  background: #f8fafc;
-}
-
-/* Gradient Text */
-.gradient-text {
-  background: var(--primary-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glass Card */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: var(--card-shadow);
-  border-radius: 16px;
-}
-
-/* Gradient Button */
-.btn-gradient {
-  background: var(--primary-gradient);
-  color: white;
-  padding: 10px 24px;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.btn-gradient:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
-}
-
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  body {
+    background-color: #f9fafb;
+    color: #111827;
   }
-}
-
-.animate-fade-in-up {
-  animation: fadeInUp 0.6s ease-out forwards;
-}
-
-.animate-delay-1 {
-  animation-delay: 0.1s;
-  opacity: 0;
-}
-.animate-delay-2 {
-  animation-delay: 0.3s;
-  opacity: 0;
-}
-.animate-delay-3 {
-  animation-delay: 0.5s;
-  opacity: 0;
 }

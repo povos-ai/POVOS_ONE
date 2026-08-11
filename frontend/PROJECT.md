@@ -1,4 +1,4 @@
-# POVOS ONE
+# <PovosText className="text-2xl" />
 
 > AI Powered Opportunity Intelligence Operating System
 
@@ -101,7 +101,7 @@ Avoid fragmented code snippets.
 
 # Platform Architecture
 
-POVOS ONE
+<PovosText className="text-2xl" />
 
 ↓
 
@@ -324,4 +324,4 @@ Development
 
 # Long-Term Goal
 
-POVOS ONE should evolve into a complete AI-powered Opportunity Operating System capable of supporting unlimited future modules without requiring architectural redesign.
+<PovosText className="text-2xl" /> should evolve into a complete AI-powered Opportunity Operating System capable of supporting unlimited future modules without requiring architectural redesign.

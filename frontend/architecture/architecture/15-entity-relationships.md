@@ -1,4 +1,4 @@
-# POVOS ONE - Entity Relationships
+# <PovosText className="text-2xl" /> - Entity Relationships
 
 Version: 1.0.0
 

@@ -1,8 +1,8 @@
-# POVOS ONE Design System
+# <PovosText className="text-2xl" /> Design System
 
 ## Objective
 
-Create a world-class, scalable, AI-first design language for POVOS ONE.
+Create a world-class, scalable, AI-first design language for <PovosText className="text-2xl" />.
 
 ## Design Philosophy
 

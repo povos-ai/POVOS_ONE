@@ -1,4 +1,4 @@
-export interface LoginRequest {
+﻿export interface LoginRequest {
   email: string;
   password: string;
 }
@@ -66,3 +66,4 @@ export interface AuthContextType {
     data: ResetPasswordRequest
   ): Promise<void>;
 }
+

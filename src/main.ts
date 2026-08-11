@@ -1,54 +1,111 @@
 import { NestFactory } from '@nestjs/core';
-import { ValidationPipe } from '@nestjs/common';
-
-import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import helmet from 'helmet';
+import { WinstonModule } from 'nest-winston';
+import * as winston from 'winston';
+import * as compression from 'compression';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  // ============================================
+  // 1. Winston Logger Configuration
+  // ============================================
+  const app = await NestFactory.create(AppModule, {
+    logger: WinstonModule.createLogger({
+      transports: [
+        // Console Transport (Development)
+        new winston.transports.Console({
+          format: winston.format.combine(
+            winston.format.timestamp(),
+            winston.format.ms(),
+            winston.format.colorize(),
+            winston.format.printf(({ timestamp, level, message, context }) => {
+              return `${timestamp} [${context || 'Application'}] ${level}: ${message}`;
+            }),
+          ),
+        }),
+        // File Transport - Error Logs
+        new winston.transports.File({
+          filename: 'logs/error.log',
+          level: 'error',
+          format: winston.format.json(),
+        }),
+        // File Transport - Combined Logs
+        new winston.transports.File({
+          filename: 'logs/combined.log',
+          format: winston.format.json(),
+        }),
+      ],
+    }),
+  });
 
-  // Global Validation
+  // ============================================
+  // 2. Security & Middleware
+  // ============================================
+  // Helmet - Security Headers
+  app.use(helmet());
+
+  // CORS - Cross-Origin Resource Sharing
+  app.enableCors({
+    origin: process.env.ALLOWED_ORIGINS?.split(',') || '*',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
+  // Compression - Gzip Response Compression
+  app.use(compression());
+
+  // ============================================
+  // 3. Global Pipes - Validation
+  // ============================================
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
-      transform: true,
       forbidNonWhitelisted: true,
+      transform: true,
     }),
   );
 
-  // Swagger Configuration
+  // ============================================
+  // 4. Swagger API Documentation
+  // ============================================
   const config = new DocumentBuilder()
-    .setTitle('POVOS ONE API')
-    .setDescription('AI Powered Opportunity Intelligence Platform')
+    .setTitle('<PovosText className="text-2xl" /> API')
+    .setDescription('AI-Powered Opportunity Intelligence Platform')
     .setVersion('1.0')
-
-    // JWT Authentication
     .addBearerAuth(
       {
         type: 'http',
         scheme: 'bearer',
         bearerFormat: 'JWT',
-        description: 'Enter JWT Access Token',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
       },
       'JWT-auth',
     )
-
+    .addTag('auth', 'Authentication endpoints')
+    .addTag('users', 'User management')
+    .addTag('workspaces', 'Workspace management')
+    .addTag('opportunities', 'Opportunity management')
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api-docs', app, document);
 
-  SwaggerModule.setup('docs', app, document, {
-    swaggerOptions: {
-      persistAuthorization: true,
-    },
-  });
+  // ============================================
+  // 5. Port Binding (Production Ready)
+  // ============================================
+  const port = process.env.PORT || 3000;
+  await app.listen(port, '0.0.0.0');
 
-  await app.listen(3001);
-
-  console.log('✅ Connected to PostgreSQL');
-  console.log('🚀 POVOS Backend running at http://localhost:3001');
-  console.log('📘 Swagger Docs: http://localhost:3001/docs');
+  // ============================================
+  // 6. Startup Log
+  // ============================================
+  console.log(`🚀 <PovosText className="text-2xl" /> API is running on: http://localhost:${port}`);
+  console.log(`📚 Swagger UI: http://localhost:${port}/api-docs`);
+  console.log(`🔗 Environment: ${process.env.NODE_ENV || 'development'}`);
 }
 
 bootstrap();

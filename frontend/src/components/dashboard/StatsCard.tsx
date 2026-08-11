@@ -1,4 +1,4 @@
-interface StatsCardProps {
+﻿interface StatsCardProps {
   title: string;
   value: string;
   subtitle: string;
@@ -25,3 +25,4 @@ export default function StatsCard({
     </div>
   );
 }
+

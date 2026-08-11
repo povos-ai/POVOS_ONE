@@ -1,4 +1,4 @@
-# POVOS ONE - Universal Entity Model
+# <PovosText className="text-2xl" /> - Universal Entity Model
 
 Version: 1.0.0
 
@@ -10,7 +10,7 @@ Owner: Platform Architecture
 
 # Purpose
 
-The Universal Entity Model (UEM) defines the canonical business objects of POVOS ONE.
+The Universal Entity Model (UEM) defines the canonical business objects of <PovosText className="text-2xl" />.
 
 Every module, framework, API, database schema, AI service, workflow and integration must use these entities.
 
@@ -102,7 +102,7 @@ Every Universal Entity must define:
 - Audit Rules
 - Version Strategy
 
-This structure applies to every entity within POVOS ONE.
+This structure applies to every entity within <PovosText className="text-2xl" />.
 
 ---
 

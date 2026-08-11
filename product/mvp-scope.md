@@ -1,6 +1,6 @@
 # MVP Scope v1.0
 
-> Product: POVOS ONE
+> Product: <PovosText className="text-2xl" />
 > Version: 1.0
 > Status: Development
 > Tagline: One Platform. Unlimited Opportunities.
@@ -9,7 +9,7 @@
 
 # Objective
 
-Build the first working MVP of POVOS ONE that enables users to discover opportunities, create AI-powered content, and manage enterprises from a single platform.
+Build the first working MVP of <PovosText className="text-2xl" /> that enables users to discover opportunities, create AI-powered content, and manage enterprises from a single platform.
 
 ---
 
@@ -26,7 +26,7 @@ Build the first working MVP of POVOS ONE that enables users to discover opportun
 
 ## 2. Dashboard
 
-The central command center of POVOS ONE.
+The central command center of <PovosText className="text-2xl" />.
 
 Features:
 

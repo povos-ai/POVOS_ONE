@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   createContext,
@@ -40,3 +40,4 @@ export function useAuthContext(): AuthContextType {
 
   return context;
 }
+

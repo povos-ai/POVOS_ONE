@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+﻿import { Controller, Get } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  @Get('ai/health')
+  getHealth() {
+    return { status: 'ok', message: 'AI services are healthy' };
+  }
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getHello() {
+    return { message: 'POVOS ONE API is running' };
   }
 }

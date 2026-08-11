@@ -1,4 +1,4 @@
-import { HTMLAttributes } from "react";
+﻿import { HTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
 type AvatarSize = "sm" | "md" | "lg" | "xl";
@@ -54,3 +54,4 @@ export default function Avatar({
     </div>
   );
 }
+

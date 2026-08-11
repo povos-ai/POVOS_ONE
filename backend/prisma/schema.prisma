@@ -3,779 +3,86 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
-
-// ============================================
-// LAYER 1: IDENTITY & WORKSPACE (Core Platform)
-// ============================================
 
 model User {
-  id          String      @id @default(cuid())
-  email       String      @unique
-  password    String
-  firstName   String
-  lastName    String?
-  phone       String?
-  avatar      String?
-  isActive    Boolean     @default(true)
-  emailVerified Boolean   @default(false)
-  lastLoginAt DateTime?
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-
-  memberships   Membership[]
-  sessions      Session[]
-  createdWorkspaces Workspace[] @relation("WorkspaceCreator")
-  submissions   Submission[]
-  notifications Notification[]
-  plannerItems  Planner[]
-  resumes       Resume[]
-  jobApplications JobApplication[]
-  businessSubmissions BusinessSubmission[]
-  campaigns     Campaign[]
-  contents      Content[]
-  booths        Booth[]
-  mediaCoverages MediaCoverage[]
-  applicationTemplates ApplicationTemplate[]
-  smartApplications   SmartApplication[]
-  verificationTokens VerificationToken[]
-
-  @@index([email])
-  @@index([isActive])
-}
-
-model Workspace {
-  id          String      @id @default(cuid())
-  name        String
-  slug        String      @unique
-  logo        String?
-  description String?
-  website     String?
-  settings    Json?
-  isActive    Boolean     @default(true)
-  createdById String
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-
-  creator       User        @relation("WorkspaceCreator", fields: [createdById], references: [id])
-  memberships   Membership[]
-  divisions     Division[]
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  firstName     String?
+  lastName      String?
+  role          String?  @default("APPLICANT")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  age           Int?
+  education     String?
+  income        String?
+  category      String?
+  state         String?
+  district      String?
+  businessType  String?
   opportunities Opportunity[]
-  memories      WorkspaceMemory[]
   submissions   Submission[]
-  plannerItems  Planner[]
-  resumes       Resume[]
-  jobApplications JobApplication[]
-  businesses    Business[]
-  businessSubmissions BusinessSubmission[]
-  campaigns     Campaign[]
-  contents      Content[]
-  booths        Booth[]
-  mediaCoverages MediaCoverage[]
-  applicationTemplates ApplicationTemplate[]
-  smartApplications   SmartApplication[]
-
-  @@index([slug])
-  @@index([isActive])
+  refreshTokens RefreshToken[]
+  workspaces    Workspace[]
 }
-
-model Division {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  workspaceId String
-  parentId    String?
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  parent      Division? @relation("DivisionHierarchy", fields: [parentId], references: [id])
-  children    Division[] @relation("DivisionHierarchy")
-  memberships Membership[]
-
-  @@index([workspaceId])
-  @@index([parentId])
-}
-
-model Membership {
-  id          String   @id @default(cuid())
-  userId      String
-  workspaceId String
-  divisionId  String?
-  roleId      String
-  isActive    Boolean  @default(true)
-  joinedAt    DateTime @default(now())
-
-  user        User        @relation(fields: [userId], references: [id])
-  workspace   Workspace   @relation(fields: [workspaceId], references: [id])
-  division    Division?   @relation(fields: [divisionId], references: [id])
-  role        Role        @relation(fields: [roleId], references: [id])
-
-  @@unique([userId, workspaceId, divisionId])
-  @@index([userId])
-  @@index([workspaceId])
-  @@index([roleId])
-}
-
-model Role {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  isSystem    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  memberships Membership[]
-  permissions Permission[] @relation()
-
-  @@unique([name])
-}
-
-model Permission {
-  id          String   @id @default(cuid())
-  resource    String
-  action      String
-  roles       Role[]   @relation()
-
-  @@unique([resource, action])
-  @@index([resource])
-}
-
-// ============================================
-// LAYER 2: UNIVERSAL ENGINES (Context-Aware)
-// ============================================
 
 model Opportunity {
-  id                String              @id @default(cuid())
-  workspaceId       String
-  title             String
-  slug              String              @unique
-  description       String
-  type              OpportunityType
-  category          OpportunityCategory
-  level             OpportunityLevel
-  state             String?
-  district          String?
-  status            OpportunityStatus   @default(DRAFT)
-  published         Boolean             @default(false)
-  applicationUrl    String?
-  startDate         DateTime?
-  lastDate          DateTime?
-  eligibility       Json?
-  benefits          Json?
-  requiredDocuments Json?
-  metadata          Json?
-  searchText        String?
-  aiSummary         String?
-  views             Int                 @default(0)
-  clicks            Int                 @default(0)
-  createdAt         DateTime            @default(now())
-  updatedAt         DateTime            @updatedAt
-
-  workspace       Workspace     @relation(fields: [workspaceId], references: [id])
-  submissions     Submission[]
-  jobApplications JobApplication[]
-  smartApplications SmartApplication[]
-
-  @@index([workspaceId])
-  @@index([type])
-  @@index([category])
-  @@index([status])
-  @@index([state])
-  @@index([lastDate])
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String?
+  category      String?  // replaced enum with string
+  type          String?  // replaced enum
+  level         String?  // replaced enum
+  status        String?  @default("OPEN")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  providerId    String
+  provider      User     @relation(fields: [providerId], references: [id])
+  state         String?
+  district      String?
+  lastDate      DateTime?
+  startDate     DateTime?
+  published     Boolean  @default(true)
+  aiSummary     String?
+  workspaceId   String?
+  workspace     Workspace? @relation(fields: [workspaceId], references: [id])
+  submissions   Submission[]
 }
 
 model Submission {
-  id            String           @id @default(cuid())
-  workspaceId   String
-  opportunityId String
-  userId        String
-  status        SubmissionStatus @default(DRAFT)
-  submittedAt   DateTime?
-  data          Json?
-  metadata      Json?
-  createdAt     DateTime         @default(now())
-  updatedAt     DateTime         @updatedAt
-
-  workspace   Workspace   @relation(fields: [workspaceId], references: [id])
-  opportunity Opportunity @relation(fields: [opportunityId], references: [id])
-  user        User        @relation(fields: [userId], references: [id])
-
-  @@index([workspaceId])
-  @@index([opportunityId])
-  @@index([userId])
-  @@index([status])
+  id             String   @id @default(cuid())
+  status         String?  @default("DRAFT")
+  applicationData String? // Json replaced with String
+  remarks        String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  submittedAt    DateTime?
+  userId         String
+  user           User     @relation(fields: [userId], references: [id])
+  opportunityId  String
+  opportunity    Opportunity @relation(fields: [opportunityId], references: [id])
 }
 
-model WorkspaceMemory {
-  id          String   @id @default(cuid())
-  workspaceId String
-  type        MemoryType
-  title       String
-  content     String?
-  metadata    Json?
-  vectorId    String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-
-  @@index([workspaceId])
-  @@index([type])
-}
-
-// ============================================
-// NOTIFICATION
-// ============================================
-
-model Notification {
+model RefreshToken {
   id        String   @id @default(cuid())
-  userId    String
-  title     String
-  message   String
-  type      String   @default("GENERAL")
-  metadata  Json?
-  read      Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user      User     @relation(fields: [userId], references: [id])
-
-  @@index([userId])
-  @@index([createdAt])
-  @@index([read])
-}
-
-// ============================================
-// PLANNER
-// ============================================
-
-model Planner {
-  id          String        @id @default(cuid())
-  userId      String
-  workspaceId String
-  title       String
-  description String?
-  type        PlannerType
-  priority    Priority      @default(MEDIUM)
-  status      PlannerStatus @default(PENDING)
-  dueDate     DateTime?
-  reminderAt  DateTime?
-  metadata    Json?
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-
-  user      User      @relation(fields: [userId], references: [id])
-  workspace Workspace @relation(fields: [workspaceId], references: [id])
-
-  @@index([userId])
-  @@index([workspaceId])
-  @@index([dueDate])
-  @@index([status])
-  @@index([type])
-}
-
-// ============================================
-// SESSION (Auth)
-// ============================================
-
-model Session {
-  id        String   @id @default(cuid())
-  userId    String
   token     String   @unique
+  userId    String
   expiresAt DateTime
   createdAt DateTime @default(now())
-
+  updatedAt DateTime @updatedAt
   user      User     @relation(fields: [userId], references: [id])
-
-  @@index([token])
-  @@index([expiresAt])
 }
 
-// ============================================
-// JOB INTELLIGENCE
-// ============================================
-
-model Resume {
-  id          String   @id @default(cuid())
-  userId      String
-  workspaceId String
-  fileName    String
-  fileUrl     String
-  fileSize    Int
-  parsedText  String?
-  skills      Json?
-  experience  Json?
-  education   Json?
-  matchScore  Float?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  user      User      @relation(fields: [userId], references: [id])
-  workspace Workspace @relation(fields: [workspaceId], references: [id])
-
-  @@index([userId])
-  @@index([workspaceId])
-}
-
-model JobApplication {
-  id          String   @id @default(cuid())
-  jobId       String
-  userId      String
-  workspaceId String
-  status      ApplicationStatus @default(PENDING)
-  matchScore  Float?
-  coverLetter String?
-  appliedAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  job       Opportunity @relation(fields: [jobId], references: [id])
-  user      User        @relation(fields: [userId], references: [id])
-  workspace Workspace   @relation(fields: [workspaceId], references: [id])
-
-  @@index([jobId])
-  @@index([userId])
-  @@index([workspaceId])
-  @@index([status])
-}
-
-// ============================================
-// BUSINESS INTELLIGENCE
-// ============================================
-
-model Business {
-  id          String   @id @default(cuid())
-  workspaceId String
-  title       String
-  slug        String   @unique
-  description String
-  type        BusinessType
-  category    BusinessCategory
-  sector      String?
-  location    String?
-  budget      Float?
-  deadline    DateTime?
-  status      BusinessStatus @default(DRAFT)
-  published   Boolean  @default(false)
-  metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  submissions BusinessSubmission[]
-
-  @@index([workspaceId])
-  @@index([type])
-  @@index([category])
-  @@index([status])
-}
-
-model BusinessSubmission {
-  id          String   @id @default(cuid())
-  businessId  String
-  userId      String
-  workspaceId String
-  status      SubmissionStatus @default(DRAFT)
-  submittedAt DateTime?
-  data        Json?
-  metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  business    Business @relation(fields: [businessId], references: [id])
-  user        User     @relation(fields: [userId], references: [id])
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-
-  @@index([businessId])
-  @@index([userId])
-  @@index([workspaceId])
-  @@index([status])
-}
-
-// ============================================
-// POLITICAL INTELLIGENCE
-// ============================================
-
-model Campaign {
-  id          String   @id @default(cuid())
-  workspaceId String
-  title       String
-  slug        String   @unique
-  description String?
-  type        CampaignType
-  status      CampaignStatus @default(DRAFT)
-  startDate   DateTime?
-  endDate     DateTime?
-  budget      Float?
-  location    String?
-  metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  contents    Content[]
-  booths      Booth[]
-  mediaCoverages MediaCoverage[]
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
-
-  @@index([workspaceId])
-}
-
-model Content {
-  id          String   @id @default(cuid())
-  campaignId  String
-  workspaceId String
-  title       String
-  slug        String   @unique
-  description String?
-  type        ContentType
-  status      ContentStatus @default(DRAFT)
-  content     String?
-  mediaUrl    String?
-  scheduledAt DateTime?
-  publishedAt DateTime?
-  metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  campaign    Campaign @relation(fields: [campaignId], references: [id])
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
-
-  @@index([campaignId])
-  @@index([workspaceId])
-}
-
-model Booth {
-  id          String   @id @default(cuid())
-  campaignId  String
-  workspaceId String
-  name        String
-  location    String
-  address     String?
-  latitude    Float?
-  longitude   Float?
-  volunteers  Int      @default(0)
-  status      BoothStatus @default(ACTIVE)
-  metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  campaign    Campaign @relation(fields: [campaignId], references: [id])
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
-
-  @@index([campaignId])
-  @@index([workspaceId])
-}
-
-model MediaCoverage {
-  id          String   @id @default(cuid())
-  campaignId  String
-  workspaceId String
-  title       String
-  source      String?
-  url         String?
-  publishedAt DateTime?
-  type        MediaType
-  metadata    Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  campaign    Campaign @relation(fields: [campaignId], references: [id])
-  workspace   Workspace @relation(fields: [workspaceId], references: [id])
-  user        User?    @relation(fields: [userId], references: [id])
-  userId      String?
-
-  @@index([campaignId])
-  @@index([workspaceId])
-}
-
-// ============================================
-// SMART APPLY
-// ============================================
-
-model ApplicationTemplate {
-  id          String   @id @default(cuid())
-  userId      String
-  workspaceId String
-  name        String
-  description String?
-  data        Json?
-  isDefault   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  user      User      @relation(fields: [userId], references: [id])
-  workspace Workspace @relation(fields: [workspaceId], references: [id])
-  applications SmartApplication[]
-
-  @@index([userId])
-  @@index([workspaceId])
-}
-
-model SmartApplication {
-  id          String   @id @default(cuid())
-  userId      String
-  workspaceId String
-  opportunityId String
-  templateId  String?
-  status      ApplicationStatus @default(PENDING)
-  data        Json?
-  appliedAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-
-  user        User        @relation(fields: [userId], references: [id])
-  workspace   Workspace   @relation(fields: [workspaceId], references: [id])
-  opportunity Opportunity @relation(fields: [opportunityId], references: [id])
-  template    ApplicationTemplate? @relation(fields: [templateId], references: [id])
-
-  @@index([userId])
-  @@index([workspaceId])
-  @@index([opportunityId])
-  @@index([status])
-}
-
-// ============================================
-// EMAIL VERIFICATION & PASSWORD RESET
-// ============================================
-
-model VerificationToken {
-  id          String   @id @default(cuid())
-  userId      String
-  token       String   @unique
-  type        TokenType
-  expiresAt   DateTime
-  createdAt   DateTime @default(now())
-  usedAt      DateTime?
-
-  user        User     @relation(fields: [userId], references: [id])
-
-  @@index([token])
-  @@index([userId])
-  @@index([expiresAt])
-}
-
-// ============================================
-// ENUMS (Universal)
-// ============================================
-
-enum OpportunityType {
-  JOB
-  SCHEME
-  TENDER
-  GRANT
-  INTERNSHIP
-  FELLOWSHIP
-  BUSINESS
-  EVENT
-  EXAM
-  RESEARCH
-  HEALTH
-  AGRICULTURE
-  OTHER
-}
-
-enum OpportunityCategory {
-  JOB
-  SCHOLARSHIP
-  TENDER
-  GRANT
-  STARTUP
-  FELLOWSHIP
-  TRAINING
-  INTERNSHIP
-  SCHEME
-  CSR
-  EVENT
-  RESEARCH
-  HEALTH
-  AGRICULTURE
-}
-
-enum OpportunityStatus {
-  DRAFT
-  PUBLISHED
-  CLOSED
-  ARCHIVED
-}
-
-enum OpportunityLevel {
-  CENTRAL
-  STATE
-  DISTRICT
-  PRIVATE
-  INTERNATIONAL
-}
-
-enum SubmissionStatus {
-  DRAFT
-  SUBMITTED
-  UNDER_REVIEW
-  APPROVED
-  REJECTED
-}
-
-enum MemoryType {
-  PROFILE
-  DOCUMENT
-  CHAT
-  PROPOSAL
-  CAMPAIGN
-  RESEARCH
-  CONSULTATION
-  SPEECH
-  SOCIAL_MEDIA
-  POLICY
-  FINANCE
-  LEGAL
-}
-
-enum PlannerType {
-  DEADLINE
-  REMINDER
-  EVENT
-  TASK
-  INTERVIEW
-  FOLLOWUP
-  MEETING
-  SUBMISSION
-}
-
-enum Priority {
-  LOW
-  MEDIUM
-  HIGH
-  URGENT
-}
-
-enum PlannerStatus {
-  PENDING
-  IN_PROGRESS
-  COMPLETED
-  CANCELLED
-  OVERDUE
-}
-
-// ============================================
-// JOB INTELLIGENCE ENUMS
-// ============================================
-
-enum ApplicationStatus {
-  PENDING
-  SHORTLISTED
-  INTERVIEW
-  OFFERED
-  REJECTED
-  WITHDRAWN
-}
-
-// ============================================
-// BUSINESS INTELLIGENCE ENUMS
-// ============================================
-
-enum BusinessType {
-  TENDER
-  B2B
-  CONSULTING
-  PARTNERSHIP
-  VENDOR
-  SUPPLY
-  SERVICE
-  PROJECT
-  INVESTMENT
-  JOINT_VENTURE
-  OTHER
-}
-
-enum BusinessCategory {
-  IT
-  CONSTRUCTION
-  HEALTHCARE
-  EDUCATION
-  AGRICULTURE
-  MANUFACTURING
-  RETAIL
-  FINANCE
-  ENERGY
-  TRANSPORT
-  TELECOM
-  OTHER
-}
-
-enum BusinessStatus {
-  DRAFT
-  PUBLISHED
-  CLOSED
-  AWARDED
-  CANCELLED
-}
-
-// ============================================
-// POLITICAL INTELLIGENCE ENUMS
-// ============================================
-
-enum CampaignType {
-  ELECTION
-  AWARENESS
-  FUNDRAISING
-  VOLUNTEER
-  SOCIAL
-  OTHER
-}
-
-enum CampaignStatus {
-  DRAFT
-  PLANNING
-  ACTIVE
-  COMPLETED
-  CANCELLED
-}
-
-enum ContentType {
-  POSTER
-  BANNER
-  SOCIAL_POST
-  VIDEO
-  ARTICLE
-  SPEECH
-  PRESS_RELEASE
-  OTHER
-}
-
-enum ContentStatus {
-  DRAFT
-  SCHEDULED
-  PUBLISHED
-  ARCHIVED
-}
-
-enum BoothStatus {
-  ACTIVE
-  INACTIVE
-  CLOSED
-}
-
-enum MediaType {
-  NEWS
-  INTERVIEW
-  PRESS_RELEASE
-  SOCIAL_MEDIA
-  BLOG
-  OTHER
-}
-
-// ============================================
-// AUTH ENUMS
-// ============================================
-
-enum TokenType {
-  EMAIL_VERIFICATION
-  PASSWORD_RESET
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  opportunities Opportunity[]
 }

@@ -1,4 +1,4 @@
-import { HTMLAttributes, ReactNode } from "react";
+﻿import { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Variant =
@@ -51,3 +51,4 @@ export default function Typography({
     </Component>
   );
 }
+

@@ -1,4 +1,4 @@
-# POVOS ONE Universal Domain Model
+# <PovosText className="text-2xl" /> Universal Domain Model
 
 Version: 1.0.0
 
@@ -8,7 +8,7 @@ Status: Draft
 
 # Purpose
 
-The Universal Domain Model defines the permanent business language of POVOS ONE.
+The Universal Domain Model defines the permanent business language of <PovosText className="text-2xl" />.
 
 Database tables may evolve.
 
@@ -22,7 +22,7 @@ The Domain Model should remain stable.
 
 # Philosophy
 
-Everything inside POVOS ONE is represented as a Universal Business Object.
+Everything inside <PovosText className="text-2xl" /> is represented as a Universal Business Object.
 
 Business Modules never reinvent objects.
 

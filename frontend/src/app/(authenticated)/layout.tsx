@@ -7,3 +7,4 @@ export default function AuthenticatedLayout({
 }) {
   return <AppShell>{children}</AppShell>;
 }
+

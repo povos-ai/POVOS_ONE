@@ -28,42 +28,42 @@ export default function LandingPage() {
       title: "AI-Powered Matching",
       description: "Smart algorithms match you with the best opportunities based on your profile.",
       color: "from-blue-500 to-purple-500",
-      image: "Ã°Å¸Â¤â€“",
+      image: "ðŸ¤–",
     },
     {
       icon: <Briefcase className="w-6 h-6" />,
       title: "Real-Time Opportunities",
       description: "Thousands of live opportunities, schemes, and grants updated in real-time.",
       color: "from-emerald-500 to-teal-500",
-      image: "Ã°Å¸â€œÅ ",
+      image: "ðŸ“Š",
     },
     {
       icon: <Users className="w-6 h-6" />,
       title: "Collaborative Platform",
       description: "Connect with organizations, reviewers, and fellow applicants.",
       color: "from-amber-500 to-orange-500",
-      image: "Ã°Å¸Â¤Â",
+      image: "ðŸ¤",
     },
     {
       icon: <BarChart3 className="w-6 h-6" />,
       title: "Analytics & Insights",
       description: "Track your applications, get insights, and improve your success rate.",
       color: "from-rose-500 to-pink-500",
-      image: "Ã°Å¸â€œË†",
+      image: "ðŸ“ˆ",
     },
     {
       icon: <Shield className="w-6 h-6" />,
       title: "Secure & Trusted",
       description: "Enterprise-grade security with data encryption and privacy controls.",
       color: "from-indigo-500 to-blue-500",
-      image: "Ã°Å¸â€â€™",
+      image: "ðŸ”’",
     },
     {
       icon: <Zap className="w-6 h-6" />,
       title: "Fast & Reliable",
       description: "Built with modern tech for speed, scalability, and 99.9% uptime.",
       color: "from-cyan-500 to-sky-500",
-      image: "Ã¢Å¡Â¡",
+      image: "âš¡",
     },
   ];
 
@@ -72,21 +72,21 @@ export default function LandingPage() {
       name: "Priya Sharma",
       role: "Founder, TechStart",
       text: "POVOS ONE helped us secure funding within 2 weeks! The AI matching is incredible.",
-      avatar: "Ã°Å¸â€˜Â©Ã¢â‚¬ÂÃ°Å¸â€™Â¼",
+      avatar: "ðŸ‘©â€ðŸ’¼",
       rating: 5,
     },
     {
       name: "Rahul Verma",
       role: "Project Manager, NGO India",
       text: "Finding government schemes used to be a nightmare. Now it's just a few clicks away.",
-      avatar: "Ã°Å¸â€˜Â¨Ã¢â‚¬ÂÃ°Å¸â€™Â¼",
+      avatar: "ðŸ‘¨â€ðŸ’¼",
       rating: 5,
     },
     {
       name: "Dr. Ananya Patel",
       role: "Researcher, IIT Delhi",
       text: "The AI recommendations are spot on. I found 3 grants I didn't even know existed!",
-      avatar: "Ã°Å¸â€˜Â©Ã¢â‚¬ÂÃ°Å¸â€Â¬",
+      avatar: "ðŸ‘©â€ðŸ”¬",
       rating: 5,
     },
   ];
@@ -240,7 +240,7 @@ export default function LandingPage() {
                   ))}
                 </div>
                 <div>
-                  <div className="flex text-yellow-400 text-sm">{"Ã¢Ëœâ€¦".repeat(5)}</div>
+                  <div className="flex text-yellow-400 text-sm">{"â˜…".repeat(5)}</div>
                   <span className="text-xs text-slate-500 dark:text-slate-400">
                     Trusted by 3,245+ users
                   </span>
@@ -286,7 +286,7 @@ export default function LandingPage() {
                   <div className="absolute top-4 left-4 z-20 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl p-3 shadow-lg shadow-blue-500/10">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-full bg-emerald-500/10 flex items-center justify-center text-emerald-500">
-                        Ã¢Å“â€œ
+                        âœ“
                       </div>
                       <div>
                         <p className="text-xs font-medium dark:text-white">AI Match</p>
@@ -297,7 +297,7 @@ export default function LandingPage() {
                   <div className="absolute bottom-4 right-4 z-20 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl p-3 shadow-lg shadow-blue-500/10">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-full bg-blue-500/10 flex items-center justify-center text-blue-500">
-                        Ã°Å¸â€œÅ 
+                        ðŸ“Š
                       </div>
                       <div>
                         <p className="text-xs font-medium dark:text-white">Views</p>
@@ -308,7 +308,7 @@ export default function LandingPage() {
                   <div className="absolute top-4 right-4 z-20 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-xl p-3 shadow-lg shadow-blue-500/10">
                     <div className="flex items-center gap-2">
                       <div className="w-8 h-8 rounded-full bg-purple-500/10 flex items-center justify-center text-purple-500">
-                        Ã¢Å“Â¨
+                        âœ¨
                       </div>
                       <div>
                         <p className="text-xs font-medium dark:text-white">New</p>
@@ -430,10 +430,10 @@ export default function LandingPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { icon: "Ã°Å¸Å¡â‚¬", title: "Fast & Scalable", description: "Built with modern tech for speed and scalability." },
-              { icon: "Ã°Å¸â€â€™", title: "Enterprise Security", description: "Bank-grade encryption and data protection." },
-              { icon: "Ã°Å¸Å’Â", title: "Global Reach", description: "Opportunities from across the world." },
-              { icon: "Ã°Å¸Â¤Â", title: "Community Support", description: "Join a community of successful applicants." },
+              { icon: "ðŸš€", title: "Fast & Scalable", description: "Built with modern tech for speed and scalability." },
+              { icon: "ðŸ”’", title: "Enterprise Security", description: "Bank-grade encryption and data protection." },
+              { icon: "ðŸŒ", title: "Global Reach", description: "Opportunities from across the world." },
+              { icon: "ðŸ¤", title: "Community Support", description: "Join a community of successful applicants." },
             ].map((feature, i) => (
               <motion.div
                 key={i}
@@ -640,19 +640,19 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               {
-                image: "Ã°Å¸Å½Â¯",
+                image: "ðŸŽ¯",
                 title: "How to Find the Right Grant",
                 excerpt: "Learn the strategies to identify and apply for grants that match your profile.",
                 date: "Dec 15, 2024",
               },
               {
-                image: "Ã°Å¸â€œË†",
+                image: "ðŸ“ˆ",
                 title: "AI Matching Explained",
                 excerpt: "Understand how our AI algorithm matches you with the best opportunities.",
                 date: "Dec 10, 2024",
               },
               {
-                image: "Ã°Å¸â€™Â¡",
+                image: "ðŸ’¡",
                 title: "5 Tips for a Winning Application",
                 excerpt: "Expert advice on crafting applications that stand out from the crowd.",
                 date: "Dec 5, 2024",
@@ -690,7 +690,7 @@ export default function LandingPage() {
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
             <div className="relative">
               <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white text-3xl shadow-xl shadow-blue-500/30 mb-6">
-                Ã°Å¸Å¡â‚¬
+                ðŸš€
               </div>
               <h2 className="text-3xl md:text-4xl font-bold dark:text-white">
                 Ready to Find Your <span className="gradient-text">Next Opportunity</span>?
@@ -718,7 +718,5 @@ export default function LandingPage() {
     </div>
   );
 }
-
-
 
 

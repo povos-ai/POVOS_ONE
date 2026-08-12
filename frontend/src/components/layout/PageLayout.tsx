@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { ReactNode } from "react";
 import { motion } from "framer-motion";
@@ -22,6 +22,4 @@ export function PageLayout({ children, title, subtitle }: PageLayoutProps) {
     </div>
   );
 }
-
-
 

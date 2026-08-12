@@ -1,40 +1,45 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import Link from "next/link";
-import AppShell from "@/components/layout/AppShell";
+import Sidebar from "@/components/layout/Sidebar";
 
 interface Opportunity {
   id: string;
   title: string;
   slug: string;
   description: string;
-  category: string;
   type: string;
-  level: string;
+  category: string;
+  state: string;
+  district: string;
   status: string;
+  published: boolean;
   createdAt: string;
   updatedAt: string;
-  providerId: string;
-  state?: string;
-  district?: string;
-  lastDate?: string;
-  startDate?: string;
-  published?: boolean;
+  workspaceId: string;
+  organizationId: string;
   aiSummary?: string;
+  aiEligibility?: string[];
+  aiBenefits?: string[];
+  aiDocuments?: string[];
+  aiApplicationProcess?: string;
+  aiTargetUsers?: string[];
+  aiTags?: string[];
+  aiGeneratedAt?: string;
+  aiModel?: string;
 }
 
-export default function OpportunityDetailPage() {
+export default function OpportunityDetail() {
   const params = useParams();
   const router = useRouter();
   const slug = params.slug as string;
-
   const [opportunity, setOpportunity] = useState<Opportunity | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!slug) return;
     const token = localStorage.getItem("token");
     if (!token) {
       router.push("/login");
@@ -45,7 +50,7 @@ export default function OpportunityDetailPage() {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Opportunity not found");
+        if (!res.ok) throw new Error("Failed to fetch opportunity");
         return res.json();
       })
       .then((data) => {
@@ -53,126 +58,139 @@ export default function OpportunityDetailPage() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error(err);
-        setError((err.message instanceof Error ? err.message.message : (typeof err.message === "string" ? err.message : JSON.stringify(err.message))));
+        setError(err.message);
         setLoading(false);
       });
   }, [slug, router]);
 
-  if (loading) {
-    return (
-      <AppShell>
-        <div className="flex justify-center items-center h-full">
-          Loading...
-        </div>
-      </AppShell>
-    );
-  }
-
-  if (error || !opportunity) {
-    return (
-      <AppShell>
-        <div className="flex flex-col items-center justify-center h-full">
-          <h2 className="text-xl font-semibold text-red-600">
-            {error || "Opportunity not found"}
-          </h2>
-          <Link
-            href="/opportunities"
-            className="mt-4 text-blue-600 hover:underline"
-          >
-            ← Back to opportunities
-          </Link>
-        </div>
-      </AppShell>
-    );
-  }
+  if (loading) return <div className="flex justify-center items-center h-64">Loading...</div>;
+  if (error) return <div className="text-red-500 p-8">Error: {error}</div>;
+  if (!opportunity) return <div className="p-8">Opportunity not found</div>;
 
   return (
-    <AppShell>
-      <div className="max-w-4xl mx-auto">
-        <Link
-          href="/opportunities"
-          className="inline-flex items-center text-sm text-blue-600 hover:underline mb-4"
+    <Sidebar>
+      <div className="max-w-4xl mx-auto p-6">
+        <button
+          onClick={() => router.back()}
+          className="text-blue-600 hover:underline flex items-center gap-2 mb-4"
         >
-          ← Back to opportunities
-        </Link>
+          ← Back
+        </button>
 
-        <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">
-            {opportunity.title}
-          </h1>
+        <div className="flex justify-between items-start">
+          <h1 className="text-3xl font-bold">{opportunity.title}</h1>
+          <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+            opportunity.status === "PUBLISHED" ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
+          }`}>
+            {opportunity.status}
+          </span>
+        </div>
 
-          <div className="flex flex-wrap gap-2 mb-4">
-            <span className="inline-block bg-blue-50 text-blue-700 text-xs px-2 py-1 rounded-full">
-              {opportunity.category || "General"}
-            </span>
-            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-              {opportunity.type || "Opportunity"}
-            </span>
-            <span className="inline-block bg-gray-100 text-gray-600 text-xs px-2 py-1 rounded-full">
-              {opportunity.level || "N/A"}
-            </span>
-            <span
-              className={`inline-block text-xs px-2 py-1 rounded-full ${
-                opportunity.status === "OPEN"
-                  ? "bg-green-100 text-green-700"
-                  : opportunity.status === "CLOSED"
-                  ? "bg-red-100 text-red-700"
-                  : "bg-gray-100 text-gray-600"
-              }`}
-            >
-              {opportunity.status || "Unknown"}
-            </span>
-          </div>
+        <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg my-4">
+          <div><span className="font-semibold">Category:</span> {opportunity.category}</div>
+          <div><span className="font-semibold">Type:</span> {opportunity.type}</div>
+          <div><span className="font-semibold">State:</span> {opportunity.state || "N/A"}</div>
+          <div><span className="font-semibold">District:</span> {opportunity.district || "N/A"}</div>
+        </div>
 
-          {opportunity.description && (
-            <div className="mb-4">
-              <h3 className="text-sm font-medium text-gray-500">Description</h3>
-              <p className="text-gray-700">{opportunity.description}</p>
-            </div>
-          )}
+        <div>
+          <h2 className="text-xl font-semibold mb-2">Description</h2>
+          <p className="text-gray-700">{opportunity.description}</p>
+        </div>
 
-          {opportunity.state && (
-            <div className="mb-2">
-              <span className="text-sm font-medium text-gray-500">State: </span>
-              <span className="text-sm text-gray-700">{opportunity.state}</span>
-            </div>
-          )}
-
-          {opportunity.lastDate && (
-            <div className="mb-2">
-              <span className="text-sm font-medium text-gray-500">
-                Deadline:{" "}
-              </span>
-              <span className="text-sm text-gray-700">
-                {new Date(opportunity.lastDate).toLocaleDateString()}
-              </span>
-            </div>
-          )}
-
-          {opportunity.aiSummary && (
-            <div className="mt-4 p-3 bg-purple-50 rounded-lg border border-purple-100">
-              <h4 className="text-sm font-medium text-purple-700">AI Summary</h4>
-              <p className="text-sm text-purple-800">{opportunity.aiSummary}</p>
-            </div>
-          )}
-
-          <div className="mt-6 flex gap-3">
-            <Link
+        {opportunity.status === "PUBLISHED" && (
+          <div className="mt-6">
+            <a
               href={`/apply?slug=${opportunity.slug}`}
-              className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition"
+              className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
             >
               Apply Now
-            </Link>
-            <Link
-              href="/opportunities"
-              className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-50 transition"
-            >
-              Browse More
-            </Link>
+            </a>
           </div>
+        )}
+
+        {/* AI sections... (keep as before) */}
+        {opportunity.aiSummary && (
+          <div className="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mt-6">
+            <h2 className="text-xl font-semibold flex items-center gap-2">
+              🤖 AI Summary
+              {opportunity.aiModel && (
+                <span className="text-sm font-normal text-gray-500">(Generated by {opportunity.aiModel})</span>
+              )}
+            </h2>
+            <p className="text-gray-700 mt-1">{opportunity.aiSummary}</p>
+          </div>
+        )}
+
+        {opportunity.aiEligibility && opportunity.aiEligibility.length > 0 && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">✅ Eligibility</h2>
+            <ul className="list-disc ml-6 space-y-1">
+              {opportunity.aiEligibility.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {opportunity.aiBenefits && opportunity.aiBenefits.length > 0 && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">🎯 Benefits</h2>
+            <ul className="list-disc ml-6 space-y-1">
+              {opportunity.aiBenefits.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {opportunity.aiDocuments && opportunity.aiDocuments.length > 0 && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">📄 Required Documents</h2>
+            <ul className="list-disc ml-6 space-y-1">
+              {opportunity.aiDocuments.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {opportunity.aiApplicationProcess && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">📋 Application Process</h2>
+            <p className="text-gray-700 whitespace-pre-line">{opportunity.aiApplicationProcess}</p>
+          </div>
+        )}
+
+        {opportunity.aiTargetUsers && opportunity.aiTargetUsers.length > 0 && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">👥 Target Users</h2>
+            <ul className="list-disc ml-6 space-y-1">
+              {opportunity.aiTargetUsers.map((item, idx) => (
+                <li key={idx}>{item}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {opportunity.aiTags && opportunity.aiTags.length > 0 && (
+          <div className="mt-4">
+            <h2 className="text-xl font-semibold flex items-center gap-2">🏷️ Tags</h2>
+            <div className="flex flex-wrap gap-2">
+              {opportunity.aiTags.map((tag, idx) => (
+                <span key={idx} className="bg-gray-200 px-3 py-1 rounded-full text-sm">{tag}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <div className="text-sm text-gray-400 border-t pt-4 mt-6">
+          <p>Created: {new Date(opportunity.createdAt).toLocaleString()}</p>
+          {opportunity.aiGeneratedAt && (
+            <p>AI Generated: {new Date(opportunity.aiGeneratedAt).toLocaleString()}</p>
+          )}
         </div>
       </div>
-    </AppShell>
+    </Sidebar>
   );
 }

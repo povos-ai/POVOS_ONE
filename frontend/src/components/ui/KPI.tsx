@@ -30,5 +30,3 @@ export function KPI({ label, value, supportingText, icon, color }: KPIProps) {
 }
 
 
-
-

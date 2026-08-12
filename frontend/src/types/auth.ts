@@ -67,5 +67,3 @@ export interface AuthContextType {
   ): Promise<void>;
 }
 
-
-

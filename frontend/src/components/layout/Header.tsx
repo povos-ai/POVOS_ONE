@@ -1,33 +1,41 @@
 ﻿"use client";
-import { useState } from "react";
-import { Search, Bell, User } from "lucide-react";
+
+import { Bell, Search, Sparkles } from "lucide-react";
 
 export default function Header() {
-  const [search, setSearch] = useState("");
-
   return (
-    <header className="bg-white shadow-sm px-4 py-3 flex items-center justify-between">
-      <div className="relative w-full max-w-md">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-        <input
-          type="text"
-          placeholder="Search opportunities, schemes, grants & tenders..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full pl-9 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-        />
+    <header className="flex-shrink-0 bg-white border-b border-gray-200 px-4 py-1.5 flex items-center justify-between h-12">
+      <div className="flex-1 max-w-2xl mx-auto">
+        <div className="relative flex items-center">
+          <Search className="absolute left-3 text-gray-400" size={15} />
+          <input
+            type="text"
+            placeholder="Search opportunities, schemes, grants & tenders… (⌘K)"
+            className="w-full pl-9 pr-28 py-1 bg-gray-50 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+          />
+          <button className="absolute right-1.5 px-3 py-0.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold rounded-lg transition flex items-center gap-1 shadow-sm">
+            <Sparkles size={12} />
+            Ask AI
+          </button>
+        </div>
       </div>
-      <div className="flex items-center gap-4">
-        <button className="p-2 rounded-full hover:bg-gray-100 transition">
-          <Bell className="w-5 h-5 text-gray-600" />
+      <div className="flex items-center gap-3 flex-shrink-0 ml-3">
+        <button className="relative p-1.5 rounded-full hover:bg-gray-100 transition">
+          <Bell size={17} className="text-gray-600" />
+          <span className="absolute top-1 right-1 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
         </button>
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center text-sm font-medium">
-            A
+        <div className="flex items-center gap-2 border-l border-gray-200 pl-2">
+          <div className="text-right hidden sm:block">
+            <p className="text-sm font-semibold leading-tight text-gray-800">Admin</p>
+            <p className="text-xs text-gray-500">Super Admin</p>
           </div>
-          <span className="text-sm font-medium text-gray-700 hidden sm:block">Admin</span>
+          <div className="w-7 h-7 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold text-xs">
+            AD
+          </div>
         </div>
       </div>
     </header>
   );
 }
+
+

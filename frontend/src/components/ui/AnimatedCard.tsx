@@ -23,3 +23,5 @@ export function AnimatedCard({ children, delay = 0, className = "" }: AnimatedCa
   );
 }
 
+
+

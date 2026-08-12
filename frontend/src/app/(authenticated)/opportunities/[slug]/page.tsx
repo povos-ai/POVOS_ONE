@@ -54,7 +54,7 @@ export default function OpportunityDetailPage() {
       })
       .catch((err) => {
         console.error(err);
-        setError(err.message);
+        setError((err.message instanceof Error ? err.message.message : (typeof err.message === "string" ? err.message : JSON.stringify(err.message))));
         setLoading(false);
       });
   }, [slug, router]);

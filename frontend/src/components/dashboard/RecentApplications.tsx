@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { FileText, CheckCircle, Clock, XCircle } from "lucide-react";
@@ -53,3 +53,5 @@ export default function RecentApplications() {
     </div>
   );
 }
+
+

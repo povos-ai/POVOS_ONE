@@ -1,13 +1,9 @@
 ﻿"use client";
-
-import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import Footer from "./Footer";
 
 export default function AppShell({ children }: { children: React.ReactNode }) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-
   return (
     <div className="flex h-screen overflow-hidden bg-gray-50">
       <Sidebar />

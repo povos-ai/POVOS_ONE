@@ -1,0 +1,168 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  APPLICANT
+  PROVIDER
+  USER
+}
+
+enum OpportunityCategory {
+  GRANT
+  TENDER
+  SCHOLARSHIP
+  LOAN
+  SUBSIDY
+  TRAINING
+  INCUBATION
+  OTHER
+  SCHEME
+  STARTUP
+}
+
+enum OpportunityType {
+  GOVERNMENT
+  PRIVATE
+  INTERNATIONAL
+  CSR
+  GRANT
+  SCHEME
+}
+
+enum OpportunityStatus {
+  DRAFT
+  OPEN
+  CLOSED
+  ARCHIVED
+  PUBLISHED
+}
+
+enum OpportunityLevel {
+  NATIONAL
+  STATE
+  DISTRICT
+  LOCAL
+}
+
+enum SubmissionStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  DOCUMENT_REQUIRED
+  APPROVED
+  REJECTED
+  WITHDRAWN
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  firstName     String?
+  lastName      String?
+  role          Role     @default(APPLICANT)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Existing fields
+  age           Int?
+  education     String?
+  state         String?
+  category      String?
+  businessType  String?
+  income        String?
+
+  // New profile fields
+  gender          String?   @default("Prefer not to say")
+  district        String?
+  city            String?
+  qualification   String?
+  fieldOfStudy    String?
+  skills          String?
+  experienceYears Int?
+  certifications  String?
+  userType        String?
+  employmentStatus String?
+  industry        String?
+  sector          String?
+  businessName    String?
+  businessSector  String?
+  businessStage   String?
+  registrationStatus String?
+  turnoverRange   String?
+  employeeCount   Int?
+  interests       Json?     // array of strings
+  preferredTypes  Json?     // array of strings
+  geoPreference   String?
+
+  // Relations
+  opportunities Opportunity[]
+  submissions   Submission[]
+  refreshTokens RefreshToken[]
+  workspaces    Workspace[]
+}
+
+model Opportunity {
+  id            String   @id @default(cuid())
+  title         String
+  slug          String   @unique
+  description   String?
+  category      OpportunityCategory
+  type          OpportunityType
+  level         OpportunityLevel
+  status        OpportunityStatus @default(OPEN)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  providerId    String
+  provider      User     @relation(fields: [providerId], references: [id])
+  state         String?
+  district      String?
+  lastDate      DateTime?
+  startDate     DateTime?
+  published     Boolean  @default(true)
+  aiSummary     String?
+  workspaceId   String?
+  workspace     Workspace? @relation(fields: [workspaceId], references: [id])
+  submissions   Submission[]
+}
+
+model Submission {
+  id             String           @id @default(cuid())
+  status         SubmissionStatus @default(DRAFT)
+  applicationData Json?
+  remarks        String?
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  submittedAt    DateTime?
+  userId         String
+  user           User             @relation(fields: [userId], references: [id])
+  opportunityId  String
+  opportunity    Opportunity      @relation(fields: [opportunityId], references: [id])
+}
+
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Workspace {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  opportunities Opportunity[]
+}

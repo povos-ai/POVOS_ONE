@@ -7,6 +7,7 @@ import DashboardHeader from "@/components/dashboard/DashboardHeader";
 import KPIGrid from "@/components/dashboard/KPIGrid";
 import Recommendations from "@/components/dashboard/Recommendations";
 import AIIntelligence from "@/components/dashboard/AIIntelligence";
+import ProfileCompletion from '@/components/profile/ProfileCompletion';
 import QuickActions from "@/components/dashboard/QuickActions";
 
 export default function DashboardPage() {
@@ -36,6 +37,7 @@ export default function DashboardPage() {
         <div className="flex-1 overflow-y-auto space-y-4">
           {/* KPI Grid */}
           <KPIGrid />
+          <ProfileCompletion completion={user?.completion || 0} />
 
           {/* Main Grid: Recommendations + AI Intelligence */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
@@ -54,3 +56,6 @@ export default function DashboardPage() {
     </AppShell>
   );
 }
+
+
+

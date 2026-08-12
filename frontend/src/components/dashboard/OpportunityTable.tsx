@@ -1,4 +1,4 @@
-const opportunities = [
+﻿const opportunities = [
   {
     title: "PMEGP Loan Scheme",
     category: "Government",
@@ -101,4 +101,6 @@ export default function OpportunityTable() {
     </div>
   );
 }
+
+
 

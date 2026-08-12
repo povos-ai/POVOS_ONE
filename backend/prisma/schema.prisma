@@ -1,4 +1,4 @@
-generator client {
+﻿generator client {
   provider = "prisma-client-js"
 }
 
@@ -16,13 +16,36 @@ model User {
   role          String?  @default("APPLICANT")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
+
   age           Int?
   education     String?
-  income        String?
-  category      String?
   state         String?
-  district      String?
+  category      String?
   businessType  String?
+  income        String?
+
+  gender          String?   @default("Prefer not to say")
+  district        String?
+  city            String?
+  qualification   String?
+  fieldOfStudy    String?
+  skills          String?
+  experienceYears Int?
+  certifications  String?
+  userType        String?
+  employmentStatus String?
+  industry        String?
+  sector          String?
+  businessName    String?
+  businessSector  String?
+  businessStage   String?
+  registrationStatus String?
+  turnoverRange   String?
+  employeeCount   Int?
+  interests       String?
+  preferredTypes  String?
+  geoPreference   String?
+
   opportunities Opportunity[]
   submissions   Submission[]
   refreshTokens RefreshToken[]
@@ -34,9 +57,9 @@ model Opportunity {
   title         String
   slug          String   @unique
   description   String?
-  category      String?  // replaced enum with string
-  type          String?  // replaced enum
-  level         String?  // replaced enum
+  category      String?
+  type          String?
+  level         String?
   status        String?  @default("OPEN")
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
@@ -56,7 +79,7 @@ model Opportunity {
 model Submission {
   id             String   @id @default(cuid())
   status         String?  @default("DRAFT")
-  applicationData String? // Json replaced with String
+  applicationData String?
   remarks        String?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
@@ -86,3 +109,5 @@ model Workspace {
   user      User     @relation(fields: [userId], references: [id])
   opportunities Opportunity[]
 }
+
+

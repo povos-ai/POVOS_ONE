@@ -1,4 +1,4 @@
-export default function userMenu() {
+﻿export default function userMenu() {
   return (
     <div className="flex items-center gap-3 rounded-full border border-gray-300 bg-white px-3 py-2 shadow-sm">
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-600 text-white font-bold">
@@ -17,4 +17,6 @@ export default function userMenu() {
     </div>
   );
 }
+
+
 

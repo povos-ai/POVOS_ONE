@@ -88,5 +88,5 @@ Return ONLY JSON.
       console.error('Gemini Design API Error:', error.message);
       throw error;
     }
-  }
+    }
 }

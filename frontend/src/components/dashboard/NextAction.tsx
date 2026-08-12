@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { Zap, User, Target } from "lucide-react";
@@ -37,3 +37,5 @@ export default function NextAction() {
     </div>
   );
 }
+
+

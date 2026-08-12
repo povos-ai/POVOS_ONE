@@ -1,4 +1,4 @@
-﻿import { useAuthStore } from "./auth-store";
+import { useAuthStore } from "./auth-store";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://192.168.1.8:3001";
 

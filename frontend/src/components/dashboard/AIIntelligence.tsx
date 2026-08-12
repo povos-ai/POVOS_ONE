@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { Sparkles, BarChart3 } from "lucide-react";
 import Link from "next/link";
 

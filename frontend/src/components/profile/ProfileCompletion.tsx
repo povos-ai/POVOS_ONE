@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 export default function ProfileCompletion({ completion }) {
   const isComplete = completion >= 80;
   return (

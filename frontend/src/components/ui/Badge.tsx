@@ -1,4 +1,4 @@
-﻿interface BadgeProps {
+interface BadgeProps {
   children: React.ReactNode;
   variant?: "green" | "blue" | "purple" | "amber" | "red";
   icon?: React.ReactNode;

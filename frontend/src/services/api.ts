@@ -1,4 +1,4 @@
-﻿import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios';
+import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios';
 
 // ============================================
 // 1. API Client Configuration

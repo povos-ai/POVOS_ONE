@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import { TrendingUp, Target, Clock, Sparkles } from "lucide-react";
 
 export default function KPIGrid({ stats }) {

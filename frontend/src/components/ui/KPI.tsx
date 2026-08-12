@@ -1,4 +1,4 @@
-﻿interface KPIProps {
+interface KPIProps {
   label: string;
   value: string | number;
   supportingText?: string;

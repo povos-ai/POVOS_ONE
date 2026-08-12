@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Bell, Search, Sparkles } from "lucide-react";
 
@@ -37,5 +37,6 @@ export default function Header() {
     </header>
   );
 }
+
 
 

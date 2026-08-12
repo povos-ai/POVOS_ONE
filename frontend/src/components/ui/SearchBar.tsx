@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { Search, Sparkles } from "lucide-react";
 

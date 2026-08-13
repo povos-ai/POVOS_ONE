@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -24,7 +24,7 @@ export default function DashboardPage() {
       return;
     }
 
-    fetch("http://localhost:3001/ai/recommendations", {
+    fetch("/ai/recommendations", {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     })
@@ -85,3 +85,5 @@ export default function DashboardPage() {
     </div>
   );
 }
+
+

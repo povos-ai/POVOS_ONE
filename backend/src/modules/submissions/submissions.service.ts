@@ -1,6 +1,5 @@
-import { Injectable, ForbiddenException, ConflictException, NotFoundException } from '@nestjs/common';
+﻿import { Injectable, ForbiddenException, ConflictException, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
-import { SubmissionStatus } from '@prisma/client';
 import { CreateSubmissionDto, UpdateSubmissionDto, UpdateStatusDto } from './dto';
 
 @Injectable()
@@ -19,7 +18,7 @@ export class SubmissionsService {
         userId,
         opportunityId: dto.opportunityId,
         applicationData: dto.applicationData,
-        status: SubmissionStatus.DRAFT,
+        status: 'DRAFT',
       },
       include: { opportunity: true },
     });
@@ -44,7 +43,7 @@ export class SubmissionsService {
 
   async update(userId: string, submissionId: string, dto: UpdateSubmissionDto) {
     const submission = await this.findOneForUser(userId, submissionId);
-    if (submission.status !== SubmissionStatus.DRAFT) {
+    if (submission.status !== 'DRAFT') {
       throw new ForbiddenException('Cannot update a submitted application');
     }
     return this.prisma.submission.update({
@@ -55,12 +54,12 @@ export class SubmissionsService {
 
   async submit(userId: string, submissionId: string) {
     const submission = await this.findOneForUser(userId, submissionId);
-    if (submission.status !== SubmissionStatus.DRAFT) {
+    if (submission.status !== 'DRAFT') {
       throw new ForbiddenException('Application is already submitted');
     }
     return this.prisma.submission.update({
       where: { id: submissionId },
-      data: { status: SubmissionStatus.SUBMITTED, submittedAt: new Date() },
+      data: { status: 'SUBMITTED', submittedAt: new Date() },
     });
   }
 
@@ -82,18 +81,18 @@ export class SubmissionsService {
   }
 
   async updateStatus(submissionId: string, dto: UpdateStatusDto) {
-    const allowedTransitions: Record<SubmissionStatus, SubmissionStatus[]> = {
-      DRAFT: [SubmissionStatus.SUBMITTED],
-      SUBMITTED: [SubmissionStatus.UNDER_REVIEW, SubmissionStatus.WITHDRAWN],
-      UNDER_REVIEW: [SubmissionStatus.DOCUMENT_REQUIRED, SubmissionStatus.APPROVED, SubmissionStatus.REJECTED],
-      DOCUMENT_REQUIRED: [SubmissionStatus.UNDER_REVIEW],
+    const allowedTransitions: Record<string, string[]> = {
+      DRAFT: ['SUBMITTED'],
+      SUBMITTED: ['UNDER_REVIEW', 'WITHDRAWN'],
+      UNDER_REVIEW: ['DOCUMENT_REQUIRED', 'APPROVED', 'REJECTED'],
+      DOCUMENT_REQUIRED: ['UNDER_REVIEW'],
       APPROVED: [],
       REJECTED: [],
       WITHDRAWN: [],
     };
     const current = await this.prisma.submission.findUnique({ where: { id: submissionId } });
     if (!current) throw new NotFoundException('Submission not found');
-    if (!allowedTransitions[current.status]?.includes(dto.status)) {
+    if (!allowedTransitions[current.status ?? ""]?.includes(dto.status)) {
       throw new ForbiddenException(`Invalid status transition from ${current.status} to ${dto.status}`);
     }
     return this.prisma.submission.update({
@@ -102,3 +101,7 @@ export class SubmissionsService {
     });
   }
 }
+
+
+
+

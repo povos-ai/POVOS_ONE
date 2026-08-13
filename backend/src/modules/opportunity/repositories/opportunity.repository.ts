@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+﻿import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../../database/prisma.service';
 
@@ -19,7 +19,6 @@ export class OpportunityRepository {
           select: {
             id: true,
             name: true,
-            slug: true,
           },
         },
       },
@@ -33,7 +32,6 @@ export class OpportunityRepository {
           select: {
             id: true,
             name: true,
-            slug: true,
           },
         },
       },
@@ -51,7 +49,6 @@ export class OpportunityRepository {
           select: {
             id: true,
             name: true,
-            slug: true,
           },
         },
       },
@@ -81,8 +78,6 @@ export class OpportunityRepository {
         firstName: true,
         lastName: true,
         email: true,
-        phone: true,
-        isActive: true,
         createdAt: true,
         updatedAt: true,
       },
@@ -96,8 +91,11 @@ export class OpportunityRepository {
     };
   }
 
-  async findActiveOpportunities(filters?: { state?: string; category?: string }) {
-    const where: any = {
+  async findActiveOpportunities(filters?: {
+    state?: string;
+    category?: string;
+  }) {
+    const where: Prisma.OpportunityWhereInput = {
       status: 'PUBLISHED',
     };
 
@@ -112,7 +110,9 @@ export class OpportunityRepository {
     return this.prisma.opportunity.findMany({
       where,
       take: 30,
-      orderBy: { createdAt: 'desc' },
+      orderBy: {
+        createdAt: 'desc',
+      },
       select: {
         id: true,
         title: true,
@@ -139,23 +139,24 @@ export class OpportunityRepository {
           select: {
             id: true,
             name: true,
-            slug: true,
           },
         },
       },
     });
   }
 
-  // ✅ New: Find by slug
+  // ===== FIND BY SLUG =====
+
   async findBySlug(slug: string) {
     return this.prisma.opportunity.findUnique({
-      where: { slug },
+      where: {
+        slug,
+      },
       include: {
         workspace: {
           select: {
             id: true,
             name: true,
-            slug: true,
           },
         },
       },

@@ -1,61 +1,57 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../database/prisma.service';
+﻿import { Injectable } from '@nestjs/common';
+import { PrismaService } from '../../prisma/prisma.service';
 import { SearchDto } from './dto/search.dto';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class SearchService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) {}
 
-  async search(dto: SearchDto) {
-    const {
-      query,
-      workspaceId,
-      category,
-      type,
-      status,
-      level,
-      state,
-      page = 1,
-      limit = 10,
-      sortBy = 'createdAt',
-      sortOrder = 'desc',
-    } = dto;
+  async search(query: string, filters: SearchDto = {}) {
+    const where: Prisma.OpportunityWhereInput = {};
 
-    const where: any = {};
-
-    // Workspace filter
-    if (workspaceId) {
-      where.workspaceId = workspaceId;
-    }
-
-    // Text search
     if (query) {
       where.OR = [
-        { title: { contains: query, mode: 'insensitive' } },
-        { description: { contains: query, mode: 'insensitive' } },
-        { searchText: { contains: query, mode: 'insensitive' } },
+        { title: { contains: query } },
+        { description: { contains: query } },
       ];
     }
 
-    // Filters
-    if (category) where.category = category;
-    if (type) where.type = type;
-    if (status) where.status = status;
-    if (level) where.level = level;
-    if (state) where.state = { contains: state, mode: 'insensitive' };
+    if (filters.category) where.category = filters.category;
+    if (filters.type) where.type = filters.type;
+    if (filters.status) where.status = filters.status;
+    if (filters.state) where.state = filters.state;
+    if (filters.district) where.district = filters.district;
+    if (filters.workspaceId) where.workspaceId = filters.workspaceId;
+
+    const allowedSortFields = ['createdAt', 'updatedAt', 'title', 'lastDate', 'startDate'];
+    const sortBy = (filters.sortBy && allowedSortFields.includes(filters.sortBy))
+      ? filters.sortBy
+      : 'createdAt';
+    const sortOrder = (filters.sortOrder === 'asc' || filters.sortOrder === 'desc')
+      ? filters.sortOrder
+      : 'desc';
+
+    const orderBy: Prisma.OpportunityOrderByWithRelationInput = {
+      [sortBy]: sortOrder,
+    };
+
+    const page = (filters.page && filters.page > 0) ? filters.page : 1;
+    const limit = (filters.limit && filters.limit > 0) ? filters.limit : 10;
+    const skip = (page - 1) * limit;
+    const take = limit;
 
     const [items, total] = await Promise.all([
       this.prisma.opportunity.findMany({
         where,
-        skip: (page - 1) * limit,
-        take: limit,
-        orderBy: { [sortBy]: sortOrder },
+        orderBy,
+        skip,
+        take,
         include: {
           workspace: {
             select: {
               id: true,
               name: true,
-              slug: true,
             },
           },
         },
@@ -63,22 +59,6 @@ export class SearchService {
       this.prisma.opportunity.count({ where }),
     ]);
 
-    return {
-      items,
-      pagination: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
-      },
-      filters: {
-        query,
-        category,
-        type,
-        status,
-        level,
-        state,
-      },
-    };
+    return { items, total };
   }
 }

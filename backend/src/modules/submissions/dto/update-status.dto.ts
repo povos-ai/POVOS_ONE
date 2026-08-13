@@ -1,11 +1,21 @@
-import { IsEnum, IsOptional, IsString } from 'class-validator';
-import { SubmissionStatus } from '@prisma/client';
+﻿import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class UpdateStatusDto {
-  @IsEnum(SubmissionStatus)
-  status: SubmissionStatus;
+  @ApiProperty({
+    enum: [
+      'DRAFT',
+      'SUBMITTED',
+      'UNDER_REVIEW',
+      'DOCUMENT_REQUIRED',
+      'APPROVED',
+      'REJECTED',
+      'WITHDRAWN',
+    ],
+  })
+  status: string;
 
-  @IsOptional()
-  @IsString()
+  @ApiPropertyOptional({
+    description: 'Optional remarks associated with the status update',
+  })
   remarks?: string;
 }

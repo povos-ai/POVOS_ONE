@@ -7,13 +7,20 @@ export class WorkspaceController {
   constructor(private readonly workspaceService: WorkspaceService) {}
 
   @Get()
-  async findAll() {
-    return this.workspaceService.findAll();
+  @UseGuards(JwtAuthGuard)
+async findAll(@Request() req) {
+    return this.workspaceService.findAll(req.user.userId);
   }
 
   @Post()
   @UseGuards(JwtAuthGuard)
   async create(@Request() req, @Body() body: any) {
-    return this.workspaceService.create(body, req.user.id);
+    console.log("req.user:", req.user);
+    console.log("req.user.userId:", req.user?.id);
+    return this.workspaceService.create(body, req.user.userId);
   }
 }
+
+
+
+

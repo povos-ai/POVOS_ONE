@@ -1,4 +1,4 @@
-import { Controller, Get, Query, UseGuards, Request } from '@nestjs/common';
+﻿import { Controller, Get, Query, UseGuards, Request } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 import { SearchService } from './search.service';
 import { SearchDto } from './dto/search.dto';
@@ -25,6 +25,7 @@ export class SearchController {
     if (!dto.workspaceId && req.user?.activeWorkspaceId) {
       dto.workspaceId = req.user.activeWorkspaceId;
     }
-    return this.searchService.search(dto);
+    return this.searchService.search(dto.q || "", dto);
   }
 }
+

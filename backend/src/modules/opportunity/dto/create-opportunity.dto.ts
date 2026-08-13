@@ -1,149 +1,45 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsDateString,
-  IsEnum,
-  IsOptional,
-  IsString,
-  IsUrl,
-} from 'class-validator';
-
-import {
-  OpportunityCategory,
-  OpportunityLevel,
-  OpportunityStatus,
-  OpportunityType,
-} from '@prisma/client';
+﻿import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateOpportunityDto {
-  @ApiProperty({
-    example: 'Bihar Startup Seed Fund Scheme',
-  })
-  @IsString()
+  @ApiProperty()
   title: string;
 
-  @ApiProperty({
-    example: 'bihar-startup-seed-fund-scheme',
-  })
-  @IsString()
-  slug: string;
+  @ApiProperty({ required: false })
+  slug?: string;
 
-  @ApiProperty({
-    example: 'Financial assistance for eligible startups.',
-  })
-  @IsString()
-  description: string;
+  @ApiProperty({ required: false })
+  description?: string;
 
-  @ApiProperty({
-    enum: OpportunityType,
-    example: OpportunityType.SCHEME,
-  })
-  @IsEnum(OpportunityType)
-  type: OpportunityType;
+  @ApiProperty({ required: false })
+  category?: string;
 
-  @ApiProperty({
-    enum: OpportunityCategory,
-    example: OpportunityCategory.SCHEME,
-  })
-  @IsEnum(OpportunityCategory)
-  category: OpportunityCategory;
+  @ApiProperty({ required: false })
+  type?: string;
 
-  @ApiProperty({
-    enum: OpportunityLevel,
-  })
-  @IsEnum(OpportunityLevel)
-  level: OpportunityLevel;
+  @ApiProperty({ required: false })
+  level?: string;
 
-  @ApiPropertyOptional({
-    enum: OpportunityStatus,
-    default: OpportunityStatus.DRAFT,
-  })
-  @IsOptional()
-  @IsEnum(OpportunityStatus)
-  status?: OpportunityStatus;
+  @ApiProperty({ required: false })
+  status?: string;
 
-  @ApiPropertyOptional({
-    example: true,
-  })
-  @IsOptional()
-  @IsBoolean()
-  published?: boolean;
-
-  @ApiPropertyOptional({
-    example: 'Bihar',
-  })
-  @IsOptional()
-  @IsString()
+  @ApiProperty({ required: false })
   state?: string;
 
-  @ApiPropertyOptional({
-    example: 'Patna',
-  })
-  @IsOptional()
-  @IsString()
+  @ApiProperty({ required: false })
   district?: string;
 
-  @ApiPropertyOptional({
-    example: 'https://startup.bihar.gov.in',
-  })
-  @IsOptional()
-  @IsUrl()
-  applicationUrl?: string;
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsDateString()
-  startDate?: string;
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsDateString()
+  @ApiProperty({ required: false })
   lastDate?: string;
 
-  @ApiPropertyOptional({
-    example: {
-      age: '18+',
-      startup: true,
-    },
-  })
-  @IsOptional()
-  eligibility?: Record<string, any>;
+  @ApiProperty({ required: false })
+  startDate?: string;
 
-  @ApiPropertyOptional({
-    example: {
-      grant: '₹10 Lakhs',
-    },
-  })
-  @IsOptional()
-  benefits?: Record<string, any>;
+  @ApiProperty({ required: false })
+  aiEligibility?: any;
 
-  @ApiPropertyOptional({
-    example: ['PAN', 'Aadhaar', 'Certificate'],
-  })
-  @IsOptional()
-  requiredDocuments?: any;
+  @ApiProperty({ required: false })
+  workspaceId?: string;
 
-  @ApiPropertyOptional({
-    example: 'AI generated summary...',
-  })
-  @IsOptional()
-  @IsString()
-  aiSummary?: string;
-
-  @ApiPropertyOptional({
-    example: 'startup grant bihar funding subsidy',
-  })
-  @IsOptional()
-  @IsString()
-  searchText?: string;
-
-  @ApiPropertyOptional()
-  @IsOptional()
-  metadata?: Record<string, any>;
-
-  @ApiProperty({
-    example: 'workspace_id_here',
-  })
-  @IsString()
-  workspaceId: string;
+  @ApiProperty({ required: false })
+  providerId?: string;
 }

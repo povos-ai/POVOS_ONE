@@ -1,4 +1,4 @@
-﻿generator client {
+generator client {
   provider = "prisma-client-js"
 }
 
@@ -8,86 +8,88 @@ datasource db {
 }
 
 model User {
-  id            String   @id @default(cuid())
-  email         String   @unique
-  password      String
-  firstName     String?
-  lastName      String?
-  role          String?  @default("APPLICANT")
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String?
+  lastName  String?
+  role      String?  @default("APPLICANT")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  age           Int?
-  education     String?
-  state         String?
-  category      String?
-  businessType  String?
-  income        String?
+  age          Int?
+  education    String?
+  state        String?
+  category     String?
+  businessType String?
+  income       String?
 
-  gender          String?   @default("Prefer not to say")
-  district        String?
-  city            String?
-  qualification   String?
-  fieldOfStudy    String?
-  skills          String?
-  experienceYears Int?
-  certifications  String?
-  userType        String?
-  employmentStatus String?
-  industry        String?
-  sector          String?
-  businessName    String?
-  businessSector  String?
-  businessStage   String?
+  gender             String? @default("Prefer not to say")
+  district           String?
+  city               String?
+  qualification      String?
+  fieldOfStudy       String?
+  skills             String?
+  experienceYears    Int?
+  certifications     String?
+  userType           String?
+  employmentStatus   String?
+  industry           String?
+  sector             String?
+  businessName       String?
+  businessSector     String?
+  businessStage      String?
   registrationStatus String?
-  turnoverRange   String?
-  employeeCount   Int?
-  interests       String?
-  preferredTypes  String?
-  geoPreference   String?
+  turnoverRange      String?
+  employeeCount      Int?
+  interests          String?
+  preferredTypes     String?
+  geoPreference      String?
 
   opportunities Opportunity[]
   submissions   Submission[]
   refreshTokens RefreshToken[]
   workspaces    Workspace[]
+  Feedback      Feedback[]
 }
 
 model Opportunity {
-  id            String   @id @default(cuid())
-  title         String
-  slug          String   @unique
-  description   String?
-  category      String?
-  type          String?
-  level         String?
-  status        String?  @default("OPEN")
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
-  providerId    String
-  provider      User     @relation(fields: [providerId], references: [id])
-  state         String?
-  district      String?
-  lastDate      DateTime?
-  startDate     DateTime?
-  published     Boolean  @default(true)
-  aiSummary     String?
-  workspaceId   String?
-  workspace     Workspace? @relation(fields: [workspaceId], references: [id])
-  submissions   Submission[]
+  id          String       @id @default(cuid())
+  title       String
+  slug        String       @unique
+  description String?
+  category    String?
+  type        String?
+  level       String?
+  status      String?      @default("OPEN")
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  providerId  String
+  provider    User         @relation(fields: [providerId], references: [id])
+  state       String?
+  district    String?
+  lastDate    DateTime?
+  startDate   DateTime?
+  published   Boolean      @default(true)
+  aiSummary   String?
+  workspaceId String?
+  workspace   Workspace?   @relation(fields: [workspaceId], references: [id])
+  submissions Submission[]
+  Feedback    Feedback[]
 }
 
 model Submission {
-  id             String   @id @default(cuid())
-  status         String?  @default("DRAFT")
+  id              String      @id @default(cuid())
+  status          String?     @default("DRAFT")
   applicationData String?
-  remarks        String?
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  submittedAt    DateTime?
-  userId         String
-  user           User     @relation(fields: [userId], references: [id])
-  opportunityId  String
-  opportunity    Opportunity @relation(fields: [opportunityId], references: [id])
+  remarks         String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+  submittedAt     DateTime?
+  userId          String
+  user            User        @relation(fields: [userId], references: [id])
+  opportunityId   String
+  opportunity     Opportunity @relation(fields: [opportunityId], references: [id])
 }
 
 model RefreshToken {
@@ -101,13 +103,25 @@ model RefreshToken {
 }
 
 model Workspace {
-  id        String   @id @default(cuid())
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  id            String        @id @default(cuid())
+  name          String
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  userId        String
+  user          User          @relation(fields: [userId], references: [id])
   opportunities Opportunity[]
 }
 
+model Feedback {
+  id            String   @id @default(cuid())
+  userId        String
+  opportunityId String
+  feedback      Boolean
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  opportunity Opportunity @relation(fields: [opportunityId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, opportunityId])
+}

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+﻿import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../../database/prisma.service';
 import { SearchOpportunityDto } from '../dto/search-opportunity.dto';
 import { Prisma } from '@prisma/client';
@@ -9,7 +9,7 @@ export class OpportunitySearchRepository {
 
   async search(dto: SearchOpportunityDto) {
     const {
-      search,           // ✅ 'search' use करें, 'q' नहीं
+      search,           // âœ… 'search' use à¤•à¤°à¥‡à¤‚, 'q' à¤¨à¤¹à¥€à¤‚
       category,
       type,
       status,
@@ -32,9 +32,8 @@ export class OpportunitySearchRepository {
     // Full-text search
     if (search) {
       where.OR = [
-        { title: { contains: search, mode: 'insensitive' } },
-        { description: { contains: search, mode: 'insensitive' } },
-        { searchText: { contains: search, mode: 'insensitive' } },
+        { title: { contains: search } },
+        { description: { contains: search } },
       ];
     }
 
@@ -43,12 +42,12 @@ export class OpportunitySearchRepository {
     if (type) where.type = type;
     if (status) where.status = status;
     if (level) where.level = level;
-    if (state) where.state = { contains: state, mode: 'insensitive' };
-    if (district) where.district = { contains: district, mode: 'insensitive' };
+    if (state) where.state = { contains: state };
+    if (district) where.district = { contains: district };
     
     if (workspaceName) {
       where.workspace = {
-        name: { contains: workspaceName, mode: 'insensitive' },
+        name: { contains: workspaceName },
       };
     }
 
@@ -87,8 +86,7 @@ export class OpportunitySearchRepository {
             select: {
               id: true,
               name: true,
-              slug: true,
-            },
+              },
           },
         },
       }),

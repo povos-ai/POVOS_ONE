@@ -5,17 +5,18 @@ import { PrismaService } from '../../database/prisma.service';
 export class WorkspaceService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
-    return this.prisma.workspace.findMany();
+  async findAll(userId: string) {
+    return this.prisma.workspace.findMany({ where: { userId } });
   }
 
   async create(data: any, userId: string) {
     return this.prisma.workspace.create({
       data: {
         name: data.name,
-        slug: data.slug,
-        createdBy: userId,
+        user: { connect: { id: userId } },
       },
     });
   }
 }
+
+

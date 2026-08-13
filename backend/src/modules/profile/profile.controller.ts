@@ -9,21 +9,21 @@ export class ProfileController {
 
   @Get()
   async getProfile(@Request() req) {
-    const user = await this.profileService.getProfile(req.user.id);
+    const user = await this.profileService.getProfile(req.user.userId);
     const completion = this.profileService.calculateCompletion(user);
     return { ...user, completion };
   }
 
   @Patch()
   async updateProfile(@Request() req, @Body() data: any) {
-    const updated = await this.profileService.updateProfile(req.user.id, data);
+    const updated = await this.profileService.updateProfile(req.user.userId, data);
     const completion = this.profileService.calculateCompletion(updated);
     return { ...updated, completion };
   }
 
   @Get('completion')
   async getCompletion(@Request() req) {
-    const user = await this.profileService.getProfile(req.user.id);
+    const user = await this.profileService.getProfile(req.user.userId);
     return { completion: this.profileService.calculateCompletion(user) };
   }
 }

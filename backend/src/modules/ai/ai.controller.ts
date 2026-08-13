@@ -1,5 +1,5 @@
 ﻿import { Controller, Post, Body, Get, Delete, Param, UseGuards, Request, NotFoundException, BadRequestException, UnauthorizedException, InternalServerErrorException, Logger } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
 import { PrismaService } from '../../prisma/prisma.service';
 import { MatchingService } from './matching.service';
 import { AiService } from './ai.service';
@@ -34,14 +34,14 @@ export class AiController {
   }
 
   @Post('feedback')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   async createOrUpdateFeedback(@Request() req, @Body() body: { opportunityId: string; feedback: boolean }) {
     try {
       this.logger.log('req.user:', req.user);
-      if (!req.user || !req.user.id) {
-        throw new UnauthorizedException('User not authenticated or missing ID');
+      if (!req.user || !req.user.userId) {
+        throw new UnauthorizedException('User not authenticated or missing userId');
       }
-      const userId = req.user.id;
+      const userId = req.user.userId;
       const { opportunityId, feedback } = body;
       if (!opportunityId) throw new BadRequestException('opportunityId is required');
       if (typeof feedback !== 'boolean') throw new BadRequestException('feedback must be a boolean');
@@ -77,13 +77,13 @@ export class AiController {
   }
 
   @Get('feedback')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   async getUserFeedback(@Request() req) {
     try {
-      if (!req.user || !req.user.id) {
-        throw new UnauthorizedException('User not authenticated or missing ID');
+      if (!req.user || !req.user.userId) {
+        throw new UnauthorizedException('User not authenticated or missing userId');
       }
-      const userId = req.user.id;
+      const userId = req.user.userId;
       const feedbacks = await this.prisma.feedback.findMany({
         where: { userId },
         select: { opportunityId: true, feedback: true },
@@ -96,13 +96,13 @@ export class AiController {
   }
 
   @Delete('feedback/:opportunityId')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(JwtAuthGuard)
   async deleteFeedback(@Request() req, @Param('opportunityId') opportunityId: string) {
     try {
-      if (!req.user || !req.user.id) {
-        throw new UnauthorizedException('User not authenticated or missing ID');
+      if (!req.user || !req.user.userId) {
+        throw new UnauthorizedException('User not authenticated or missing userId');
       }
-      const userId = req.user.id;
+      const userId = req.user.userId;
       const existing = await this.prisma.feedback.findFirst({
         where: { userId, opportunityId },
       });
@@ -115,3 +115,4 @@ export class AiController {
     }
   }
 }
+

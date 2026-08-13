@@ -1,4 +1,5 @@
 ﻿import { Module } from '@nestjs/common';
+import { ThrottlerModule } from '@nestjs/throttler';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from './prisma/prisma.module';
 import { AiModule } from './modules/ai/ai.module';
@@ -16,6 +17,14 @@ import { WorkspaceModule } from './modules/workspace/workspace.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60,
+          limit: 10,
+        },
+      ],
+    }),
     PrismaModule,
     AiModule,
     AuthModule,
@@ -31,3 +40,6 @@ import { WorkspaceModule } from './modules/workspace/workspace.module';
   ],
 })
 export class AppModule {}
+
+
+

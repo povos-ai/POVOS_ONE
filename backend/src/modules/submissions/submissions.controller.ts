@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Param, Put, Patch, Request, UseGuards } from '@nestjs/common';
+﻿import { Controller, Post, Body, Get, Param, Put, Patch, Request, UseGuards } from '@nestjs/common';
 import { SubmissionsService } from './submissions.service';
 import { CreateSubmissionDto, UpdateSubmissionDto, UpdateStatusDto } from './dto';
 import { JwtAuthGuard } from '../../common/guards/jwt-auth.guard';
@@ -44,7 +44,7 @@ export class SubmissionsController {
     return this.submissionsService.submit(userId, id);
   }
 
-  // Admin endpoints � protected by JWT Auth + Role Check
+  // Admin endpoints – protected by JWT Auth + Role Check
   @Get('admin/all')
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles('ADMIN')
@@ -66,3 +66,4 @@ export class SubmissionsController {
     return this.submissionsService.updateStatus(id, dto);
   }
 }
+

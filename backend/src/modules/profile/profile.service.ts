@@ -8,6 +8,43 @@ export class ProfileService {
   async getProfile(userId: string) {
     return this.prisma.user.findUnique({
       where: { id: userId },
+      select: {
+        id: true,
+        email: true,
+        firstName: true,
+        lastName: true,
+        role: true,
+        createdAt: true,
+        updatedAt: true,
+        age: true,
+        education: true,
+        state: true,
+        category: true,
+        businessType: true,
+        income: true,
+        gender: true,
+        district: true,
+        city: true,
+        qualification: true,
+        fieldOfStudy: true,
+        skills: true,
+        experienceYears: true,
+        certifications: true,
+        userType: true,
+        employmentStatus: true,
+        industry: true,
+        sector: true,
+        businessName: true,
+        businessSector: true,
+        businessStage: true,
+        registrationStatus: true,
+        turnoverRange: true,
+        employeeCount: true,
+        interests: true,
+        preferredTypes: true,
+        geoPreference: true,
+        // password is deliberately excluded
+      },
     });
   }
 
@@ -25,8 +62,22 @@ export class ProfileService {
     if (profile.state) score += 10;
     if (profile.education) score += 15;
     if (profile.userType) score += 15;
-    if (profile.interests && JSON.parse(profile.interests || '[]').length > 0) score += 15;
-    if (profile.preferredTypes && JSON.parse(profile.preferredTypes || '[]').length > 0) score += 10;
+    // Safely parse interests
+    let interests: any[] = [];
+    try {
+      interests = profile.interests ? JSON.parse(profile.interests) : [];
+    } catch {
+      interests = [];
+    }
+    if (interests.length > 0) score += 15;
+    // Safely parse preferredTypes
+    let preferredTypes: any[] = [];
+    try {
+      preferredTypes = profile.preferredTypes ? JSON.parse(profile.preferredTypes) : [];
+    } catch {
+      preferredTypes = [];
+    }
+    if (preferredTypes.length > 0) score += 10;
     if (profile.geoPreference) score += 10;
     if (profile.userType === 'Entrepreneur') {
       if (profile.businessType) score += 5;

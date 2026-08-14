@@ -1,9 +1,13 @@
-import AppShell from "@/components/layout/AppShell";
+import { WorkspaceProvider } from "@/context/WorkspaceContext";
 
 export default function AuthenticatedLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  return <AppShell>{children}</AppShell>;
+  return (
+    <WorkspaceProvider>
+      {children}
+    </WorkspaceProvider>
+  );
 }

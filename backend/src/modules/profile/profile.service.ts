@@ -1,4 +1,4 @@
-﻿import { Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
@@ -49,10 +49,56 @@ export class ProfileService {
   }
 
   async updateProfile(userId: string, data: any) {
-    return this.prisma.user.update({
+    // Only allow specific fields to be updated
+    const allowedFields = [
+      'firstName',
+      'lastName',
+      'email',
+      'age',
+      'education',
+      'state',
+      'category',
+      'businessType',
+      'income',
+      'gender',
+      'district',
+      'city',
+      'qualification',
+      'fieldOfStudy',
+      'skills',
+      'experienceYears',
+      'certifications',
+      'userType',
+      'employmentStatus',
+      'industry',
+      'sector',
+      'businessName',
+      'businessSector',
+      'businessStage',
+      'registrationStatus',
+      'turnoverRange',
+      'employeeCount',
+      'interests',
+      'preferredTypes',
+      'geoPreference',
+    ];
+
+    // Filter the data to only include allowed fields
+    const filteredData: any = {};
+    for (const key of allowedFields) {
+      if (data[key] !== undefined) {
+        filteredData[key] = data[key];
+      }
+    }
+
+    // Update the user
+    await this.prisma.user.update({
       where: { id: userId },
-      data,
+      data: filteredData,
     });
+
+    // Return the updated profile WITHOUT password using getProfile
+    return this.getProfile(userId);
   }
 
   calculateCompletion(profile: any): number {

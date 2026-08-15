@@ -15,8 +15,11 @@ RUN npm install
 
 COPY . .
 
-# Generate Prisma Client for Debian
-RUN npx prisma generate --engine-type debian-openssl-3.0.x
+# Set environment variable for Prisma engine
+ENV PRISMA_CLIENT_ENGINE_TYPE=debian-openssl-3.0.x
+
+# Generate Prisma Client (will use the engine type from env var)
+RUN npx prisma generate
 
 # ============================================
 # STAGE 2: Production
@@ -30,6 +33,9 @@ RUN apt-get update -y && apt-get install -y openssl && apt-get clean
 
 # Copy all files from dev stage
 COPY --from=dev /app ./
+
+# Set environment variable for runtime
+ENV PRISMA_CLIENT_ENGINE_TYPE=debian-openssl-3.0.x
 
 # Expose port
 EXPOSE 3001

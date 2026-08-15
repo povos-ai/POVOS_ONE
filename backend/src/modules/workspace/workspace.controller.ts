@@ -8,19 +8,13 @@ export class WorkspaceController {
 
   @Get()
   @UseGuards(JwtAuthGuard)
-async findAll(@Request() req) {
+  async findAll(@Request() req) {
     return this.workspaceService.findAll(req.user.userId);
   }
 
   @Post()
   @UseGuards(JwtAuthGuard)
   async create(@Request() req, @Body() body: any) {
-    console.log("req.user:", req.user);
-    console.log("req.user.userId:", req.user?.id);
     return this.workspaceService.create(body, req.user.userId);
   }
 }
-
-
-
-

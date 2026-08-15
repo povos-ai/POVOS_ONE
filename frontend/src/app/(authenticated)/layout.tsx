@@ -1,4 +1,5 @@
-import { WorkspaceProvider } from "@/context/WorkspaceContext";
+﻿import { WorkspaceProvider } from "@/context/WorkspaceContext";
+import AppShell from "@/components/layout/AppShell";
 
 export default function AuthenticatedLayout({
   children,
@@ -7,7 +8,7 @@ export default function AuthenticatedLayout({
 }) {
   return (
     <WorkspaceProvider>
-      {children}
+      <AppShell>{children}</AppShell>
     </WorkspaceProvider>
   );
 }

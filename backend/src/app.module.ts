@@ -7,7 +7,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { HealthModule } from './modules/health/health.module';
 import { MatchModule } from './modules/match/match.module';
-import { OpportunitiesModule } from './modules/opportunities/opportunities.module';
 import { OpportunityModule } from './modules/opportunity/opportunity.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { SearchModule } from './modules/search/search.module';
@@ -31,7 +30,6 @@ import { WorkspaceModule } from './modules/workspace/workspace.module';
     DashboardModule,
     HealthModule,
     MatchModule,
-    OpportunitiesModule,
     OpportunityModule,
     ProfileModule,
     SearchModule,
@@ -40,6 +38,7 @@ import { WorkspaceModule } from './modules/workspace/workspace.module';
   ],
 })
 export class AppModule {}
+
 
 
 

@@ -1,15 +1,15 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios';
+﻿import axios, { AxiosInstance, InternalAxiosRequestConfig, AxiosError } from 'axios';
 
 // ============================================
 // 1. API Client Configuration
 // ============================================
 const getBaseURL = () => {
   if (typeof window !== 'undefined') {
-    // Browser: use localhost
-    return 'http://192.168.1.8:3001';
+    // Browser: use environment variable or localhost
+    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
   } else {
-    // Server (Node.js): use Docker service name
-    return process.env.NEXT_PUBLIC_API_URL || 'http://192.168.1.8:3001';
+    // Server (Node.js): use environment variable or localhost
+    return process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001';
   }
 };
 
@@ -158,10 +158,3 @@ export const del = async <T>(url: string): Promise<T> => {
 };
 
 export default api;
-
-
-
-
-
-
-

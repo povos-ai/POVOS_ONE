@@ -11,23 +11,36 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string): Promise<any> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
-    if (!user) return null;
-    const valid = await bcrypt.compare(password, user.password);
-    if (!valid) return null;
-    const { password: _, ...result } = user;
-    return result;
+    try {
+      const user = await this.prisma.user.findUnique({ where: { email } });
+      if (!user) {
+        return null;
+      }
+      const valid = await bcrypt.compare(password, user.password);
+      if (!valid) {
+        return null;
+      }
+      const { password: _, ...result } = user;
+      return result;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async login(email: string, password: string) {
-    const user = await this.validateUser(email, password);
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
+    try {
+      const user = await this.validateUser(email, password);
+      if (!user) {
+        throw new UnauthorizedException('Invalid credentials');
+      }
+      const payload = { email: user.email, sub: user.id, role: user.role };
+      const token = this.jwtService.sign(payload);
+      return {
+        accessToken: token,
+        user,
+      };
+    } catch (error) {
+      throw error;
     }
-    const payload = { email: user.email, sub: user.id, role: user.role };
-    return {
-      accessToken: this.jwtService.sign(payload),
-      user,
-    };
   }
 }

@@ -25,9 +25,13 @@ export class AiController {
   }
 
   @Post('recommendations')
-  async getRecommendations() {
+  @UseGuards(JwtAuthGuard)
+  async getRecommendations(@Request() req) {
+    if (!req.user || !req.user.userId) {
+      throw new UnauthorizedException('User not authenticated');
+    }
     const user = await this.prisma.user.findUnique({
-      where: { email: 'demo@povos.com' },
+      where: { id: req.user.userId },
     });
     if (!user) throw new NotFoundException('User not found');
     return this.matchingService.getRecommendations(user);
@@ -115,4 +119,3 @@ export class AiController {
     }
   }
 }
-

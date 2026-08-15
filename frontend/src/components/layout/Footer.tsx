@@ -1,7 +1,7 @@
 ﻿export default function Footer() {
   return (
-    <footer className="border-t py-4 text-center text-sm text-gray-500">
-      One Platform. Unlimited Opportunities. — POVOS ONE
+    <footer className="bg-white border-t border-gray-200 p-4 text-center text-sm text-gray-500">
+      © {new Date().getFullYear()} POVOS ONE — One Platform. Unlimited Opportunities.
     </footer>
   );
 }

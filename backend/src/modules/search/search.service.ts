@@ -36,8 +36,8 @@ export class SearchService {
       [sortBy]: sortOrder,
     };
 
-    const page = (filters.page && filters.page > 0) ? filters.page : 1;
-    const limit = (filters.limit && filters.limit > 0) ? filters.limit : 10;
+    const page = (filters.page && parseInt(String(filters.page)) > 0) ? parseInt(String(filters.page)) : 1;
+    const limit = (filters.limit && parseInt(String(filters.limit)) > 0) ? parseInt(String(filters.limit)) : 10;
     const skip = (page - 1) * limit;
     const take = limit;
 
@@ -62,3 +62,4 @@ export class SearchService {
     return { items, total };
   }
 }
+

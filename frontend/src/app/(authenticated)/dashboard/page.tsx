@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -55,7 +55,10 @@ export default function DashboardPage() {
           },
         });
       })
-      .catch(() => {
+      .catch((err) => {
+    console.error("Dashboard error:", err);
+    const errorMsg = typeof err === "string" ? err : err?.message || "Failed to load data";
+    console.error("Dashboard fetch error:", err);
         setDashboardData({
           recommendations: [],
           stats: { new: 0, strong: 0, closing: 0, avgMatch: 0 },
@@ -85,5 +88,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-
-

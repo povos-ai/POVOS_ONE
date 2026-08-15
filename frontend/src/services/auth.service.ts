@@ -1,4 +1,4 @@
-import api from './api';
+﻿import api from './api';
 
 export interface LoginData {
   email: string;
@@ -13,7 +13,7 @@ export interface RegisterData {
   phone: string;
 }
 
-export interface user {
+export interface User {
   id: string;
   firstName: string;
   lastName: string;
@@ -23,37 +23,34 @@ export interface user {
 
 export const authService = {
   async register(data: RegisterData) {
-    const response = await api.post('/api/auth/register', data);
+    const response = await api.post('/auth/register', data);
     return response.data;
   },
 
   async login(data: LoginData) {
-    console.log('ðŸ”‘ Login called with:', data.email);
-    const response = await api.post('/api/auth/login', data);
-    console.log('ðŸ“¨ Login response:', response.data);
-    
+    const response = await api.post('/auth/login', data);
+
     if (response.data.accessToken) {
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem('token', response.data.accessToken);
       localStorage.setItem('user', JSON.stringify(response.data.user));
     }
     return response.data;
   },
 
   logout() {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('token');
     localStorage.removeItem('user');
     window.location.href = '/login';
   },
 
-  getCurrentuser(): user | null {
+  getCurrentUser(): User | null {
     const user = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   },
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('accessToken');
+    return !!localStorage.getItem('token');
   },
 };
 
 export default authService;
-

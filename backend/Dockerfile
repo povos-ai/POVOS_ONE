@@ -1,10 +1,10 @@
 ﻿# ============================================
 # STAGE 1: Development Dependencies
 # ============================================
-FROM node:20-alpine AS dev
+FROM node:20-slim AS dev
 
-# Install OpenSSL for Prisma on Alpine
-RUN apk add --no-cache openssl
+# Install OpenSSL for Prisma on Debian
+RUN apt-get update -y && apt-get install -y openssl && apt-get clean
 
 WORKDIR /app
 COPY package*.json ./
@@ -15,11 +15,11 @@ RUN npm install
 
 COPY . .
 
-# Generate Prisma Client
-RUN npx prisma generate
+# Generate Prisma Client for Debian
+RUN npx prisma generate --engine-type debian-openssl-3.0.x
 
 # ============================================
-# STAGE 2: Production (Run with ts-node)
+# STAGE 2: Production
 # ============================================
 FROM node:20-slim
 

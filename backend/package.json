@@ -1,4 +1,4 @@
-{
+﻿{
     "name": "povos-one-backend",
     "version": "1.0.0",
     "description": "AI-Powered Opportunity Intelligence Platform",
@@ -21,7 +21,7 @@
         "prisma:migrate": "npx prisma migrate dev",
         "prisma:deploy": "npx prisma migrate deploy",
         "prisma:studio": "npx prisma studio",
-        "postinstall": "npx prisma generate --schema ./prisma/schema.prisma"
+        "postinstall": "npx prisma generate", "npx prisma generate --schema ./prisma/schema.prisma"
     },
     "dependencies": {
         "@google/generative-ai": "^0.24.1",
@@ -98,4 +98,5 @@
         "testEnvironment": "node"
     }
 }
+
 
